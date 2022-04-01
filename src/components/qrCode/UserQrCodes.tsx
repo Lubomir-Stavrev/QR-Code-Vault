@@ -6,11 +6,12 @@ import {
     SafeAreaView,
     FlatList,
     StatusBar,
+    ScrollView,
     TouchableOpacity
 } from 'react-native';
 
 
-import storageServices from '../storageServices/encryptedStorage'
+import storageServices from '../../services/encryptedStorage'
 import QRCode from 'react-native-qrcode-svg';
 
 interface Props {
@@ -69,37 +70,36 @@ const UserQrCodes: FC<Props> = (props) => {
                         </TouchableOpacity>
                         {
                             userQRCodes?.length > 0 ?
-                                <FlatList
-                                    data={userQRCodes ? userQRCodes : null}
-                                    keyExtractor={(item) => item?.id}
-                                    renderItem={({ item }) => (
-                                        <View style={{
-                                            padding: 10,
-                                            backgroundColor: '#FFCC1D',
-                                            marginBottom: 5,
-                                            borderRadius: 5
-                                        }}>
-                                            <TouchableOpacity style={{
-                                                position: 'absolute',
-                                                backgroundColor: '#CD1818',
-                                                height: 120,
-                                                width: 60,
-                                                borderTopRightRadius: 5,
-                                                borderBottomRightRadius: 5,
-                                                right: 0
-                                            }} onPress={() => deleteQRCode(item?.id)}>
+                                userQRCodes.map(item => {
+                                    return (
+                                        <ScrollView key={item.id}>
+                                            <View style={{
+                                                padding: 10,
+                                                backgroundColor: '#FFCC1D',
+                                                marginBottom: 5,
+                                                borderRadius: 5
+                                            }}>
+                                                <TouchableOpacity style={{
+                                                    position: 'absolute',
+                                                    backgroundColor: '#CD1818',
+                                                    height: 120,
+                                                    width: 60,
+                                                    borderTopRightRadius: 5,
+                                                    borderBottomRightRadius: 5,
+                                                    right: 0
+                                                }} onPress={() => deleteQRCode(item?.id)}>
 
-                                                <Text style={{ alignSelf: 'center', top: 45 }}>Delete</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={() => showQRData(item?.qrCodeData)}>
-                                                <QRCode
-                                                    value={item?.qrCodeData}
-                                                />
+                                                    <Text style={{ alignSelf: 'center', top: 45 }}>Delete</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => showQRData(item?.qrCodeData)}>
+                                                    <QRCode
+                                                        value={item?.qrCodeData}
+                                                    />
 
-                                            </TouchableOpacity>
-                                        </View>
-                                    )} />
-
+                                                </TouchableOpacity>
+                                            </View>
+                                        </ScrollView>)
+                                })
                                 :
                                 <Text style={{ fontSize: 30, top: 100, }}>Collection is empty</Text>}
                     </>

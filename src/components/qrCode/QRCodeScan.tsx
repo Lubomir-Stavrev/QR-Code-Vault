@@ -7,9 +7,13 @@ import {
 
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import storageServices from '../storageServices/encryptedStorage'
+import storageServices from '../../services/encryptedStorage'
 
-const QRCodeScan: FC = ({ goToOptions }) => {
+interface Props {
+    goToOptions: () => void;
+}
+
+const QRCodeScan: FC<Props> = ({ goToOptions }) => {
 
     const windowHeight = Dimensions.get('window').height;
 

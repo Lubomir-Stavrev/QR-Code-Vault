@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 
-import PinCodeBackupAuth from './pinCodeBackupAuth/PinCodeBackup';
-import BiometricAuth from './biometricAuth/BiometricAuth';
+import PinCodeBackupAuth from '../../components/pinCodeBackupAuth/PinCodeBackup';
+import BiometricAuth from '../../components/biometricAuth/BiometricAuth';
 
 import TouchID from 'react-native-touch-id';
 
@@ -24,13 +24,6 @@ const Authentication: FC<Props> = (props) => {
     const windowHeight = Dimensions.get('window').height;
     const windowWidth = Dimensions.get('window').width;
 
-    useEffect(() => {
-
-        let isMounted = true;               // note mutable flag
-
-        return () => { isMounted = false };
-
-    }, [])
 
     const isBiometricSignInSupported = () => {
 

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState, } from 'react';
 import {
     StyleSheet,
     Text,
@@ -16,12 +16,36 @@ interface Props {
     onSuccesfullAuthentication: () => void;
 }
 const PinCodeBackup: FC<Props> = (props) => {
+    const [isPinCodeSettedByUser, setIsPinCodeSettedByUser] = useState<boolean | null>(false)
+
+    useEffect(() => {
+        let isMounted = true;
+        let abortController = new AbortController();
+        if (isMounted) {
+            async function isPinCodeSetted() {
+                try {
+                    let result = await hasUserSetPinCode(pinCodeKeychainName)
+                    if (await result) {
+                        console.log(result);
+                        setIsPinCodeSettedByUser(prev => result)
+
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            isPinCodeSetted()
+
+        }
+        return () => {
+            setIsPinCodeSettedByUser(prev => false); // This worked for me
+            isMounted = false;
+            abortController.abort();
+        };
+
+    }, [])
 
 
-    function isPinCodeSetted() {
-        return hasUserSetPinCode(pinCodeKeychainName)
-            .then(res => res);
-    }
 
     const changePin = async () => {
         let result = await deleteUserPinCode(pinCodeKeychainName);
@@ -44,7 +68,7 @@ const PinCodeBackup: FC<Props> = (props) => {
 
     return (
         <>
-            {isPinCodeSetted() ?
+            {isPinCodeSettedByUser ?
                 <>
                     <PINCode
                         callbackErrorTouchId={(e) => console.log(e)}

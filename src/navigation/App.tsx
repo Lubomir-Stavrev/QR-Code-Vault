@@ -11,8 +11,8 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import AuthScreen from './auth/AuthenticationRoute'
-import QRCodeScreen from './qrCode/QRCodeRoute'
+import AuthScreen from '../screens/auth/AuthenticationRoute'
+import QRCodeScreen from '../components/qrCode/QRCodeRoute'
 
 const Stack = createNativeStackNavigator();
 
