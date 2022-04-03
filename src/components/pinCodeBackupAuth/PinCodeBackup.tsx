@@ -1,69 +1,65 @@
 import React, { FC, useEffect, useState, } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity,
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import * as Keychain from 'react-native-keychain';
-import PINCode, { hasUserSetPinCode, deleteUserPinCode } from '@haskkor/react-native-pincode'
-
+import PINCode, { hasUserSetPinCode } from '@haskkor/react-native-pincode'
 
 const pinCodeKeychainName = 'pincode'
 const defaultPasswordLength = 6;
+
 interface Props {
     onSuccesfullAuthentication: () => void;
 }
+
 const PinCodeBackup: FC<Props> = (props) => {
     const [isPinCodeSettedByUser, setIsPinCodeSettedByUser] = useState<boolean | null>(false)
 
     useEffect(() => {
-        let isMounted = true;
-        let abortController = new AbortController();
-        if (isMounted) {
-            async function isPinCodeSetted() {
-                try {
-                    let result = await hasUserSetPinCode(pinCodeKeychainName)
-                    if (await result) {
-                        console.log(result);
-                        setIsPinCodeSettedByUser(prev => result)
 
-                    }
-                } catch (err) {
-                    console.log(err);
-                }
+        async function isPinCodeSetted() {
+            try {
+                let result = await hasUserSetPinCode(pinCodeKeychainName)
+
+                if (result) setIsPinCodeSettedByUser(result)
+
+            } catch (err) {
+                console.log(err);
+                //handle ERROR
             }
-            isPinCodeSetted()
-
         }
-        return () => {
-            setIsPinCodeSettedByUser(prev => false); // This worked for me
-            isMounted = false;
-            abortController.abort();
-        };
+        isPinCodeSetted()
 
     }, [])
 
-
-
-    const changePin = async () => {
-        let result = await deleteUserPinCode(pinCodeKeychainName);
-        console.log(result);
-
-    }
-
-    const savePinInKeyChain = async (pin) => {
+    const savePinInKeyChain = (pin: string | undefined) => {
 
         try {
-            let credentials = await Keychain.setInternetCredentials(pinCodeKeychainName, pinCodeKeychainName, pin);
-            console.log(credentials);
+            if (pin) Keychain.setInternetCredentials(pinCodeKeychainName, pinCodeKeychainName, pin);
         }
         catch (error) {
             //handle error
             console.log('Keychain couldn\'t be accessed!', error);
         }
 
+    }
+
+    const createPinCodeComponent = () => {
+        return (
+            <PINCode
+                alphabetCharsVisible={false}
+                iconButtonDeleteDisabled={true}
+                stylePinCodeDeleteButtonText={{ marginTop: "30%", fontSize: 20, fontWeight: "900" }}
+                stylePinCodeTextButtonCircle={{ fontSize: 40, fontWeight: '300' }}
+                stylePinCodeCircle={{ width: 20, height: 5 }}
+                colorCircleButtons={'rgba(70,70,70,1)'}
+                passwordLength={defaultPasswordLength}
+                stylePinCodeTextTitle={styles.pinContainerStyle}
+                styleLockScreenTitle={styles.pinContainerStyle}
+                status={'choose'}
+                stylePinCodeTextSubtitle={{ fontSize: 20, fontWeight: "400" }}
+                finishProcess={(pin) => savePinInKeyChain(pin)}
+            />
+        );
     }
 
     return (
@@ -84,33 +80,8 @@ const PinCodeBackup: FC<Props> = (props) => {
                         status={'enter'}
                         finishProcess={() => props.onSuccesfullAuthentication()}
                     />
-                    <View style={{ position: 'absolute', bottom: "10%", alignSelf: 'center' }}>
-                        <TouchableOpacity onPress={() => changePin()}>
-                            <Text style={{
-                                fontSize: 25,
-                                color: '#202020',
-                                fontWeight: "300",
-
-                            }}>
-                                change pin
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
                 </>
-                : <PINCode
-                    alphabetCharsVisible={false}
-                    iconButtonDeleteDisabled={true}
-                    stylePinCodeDeleteButtonText={{ marginTop: "30%", fontSize: 20, fontWeight: "900" }}
-                    stylePinCodeTextButtonCircle={{ fontSize: 40, fontWeight: '300' }}
-                    stylePinCodeCircle={{ width: 20, height: 5 }}
-                    colorCircleButtons={'rgba(70,70,70,1)'}
-                    passwordLength={defaultPasswordLength}
-                    stylePinCodeTextTitle={styles.pinContainerStyle}
-                    styleLockScreenTitle={styles.pinContainerStyle}
-                    status={'choose'}
-                    stylePinCodeTextSubtitle={{ fontSize: 20, fontWeight: "400" }}
-                    finishProcess={(pin) => savePinInKeyChain(pin)}
-                />}
+                : createPinCodeComponent}
         </>
     );
 };

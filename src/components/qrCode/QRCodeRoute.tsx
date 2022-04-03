@@ -20,7 +20,8 @@ const QRCodeRoute: FC = () => {
     const windowWidth = Dimensions.get('window').width;
 
 
-    const handleQRCodeOptionPressed = (isAddQRCodeState) => {
+    const handleQRCodeOptionPressed = (isAddQRCodeState: boolean) => {
+
         setIsAddQRCode(prev => isAddQRCodeState);
         setOptionViewState(prev => false)
     }

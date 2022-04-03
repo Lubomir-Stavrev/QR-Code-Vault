@@ -36,12 +36,12 @@ const App: FC = () => {
               <Stack.Screen
                 name="Auth"
                 component={AuthScreen}
-                options={{ title: null, headerShown: false }}
+                options={{ headerShown: false }}
               />
               <Stack.Screen
                 name="QRCodeRoute"
                 component={QRCodeScreen}
-                options={{ title: null, headerShown: false }}
+                options={{ headerShown: false }}
               />
             </Stack.Navigator>
           </View>

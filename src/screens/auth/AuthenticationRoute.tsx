@@ -14,7 +14,7 @@ import BiometricAuth from '../../components/biometricAuth/BiometricAuth';
 import TouchID from 'react-native-touch-id';
 
 interface Props {
-    navigation: (text: string) => void;
+    navigation: { navigate: (text: string) => void }
 }
 const Authentication: FC<Props> = (props) => {
 
@@ -29,7 +29,8 @@ const Authentication: FC<Props> = (props) => {
 
         TouchID.isSupported()
             .then(biometryType => {
-                setIsBiometricSignIn(prev => true);
+                setIsBiometricSignIn(true);
+
                 if (biometryType === 'FaceID') {
                     console.log('FaceID is supported.');
                 } else {
@@ -37,10 +38,9 @@ const Authentication: FC<Props> = (props) => {
                 }
             })
             .catch(error => {
-                setIsBiometricSignIn(prev => false);
-                console.log(error);
+                setIsBiometricSignIn(false);
             });
-        setIsSignedIn(prev => true);
+        setIsSignedIn(true);
     }
 
     const onSuccesfullAuthentication = () => {
@@ -48,7 +48,7 @@ const Authentication: FC<Props> = (props) => {
     }
 
     const handlePinCodeSignIn = () => {
-        setIsBiometricSignIn(prev => false);
+        setIsBiometricSignIn(false);
     }
 
 

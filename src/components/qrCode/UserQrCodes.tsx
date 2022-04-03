@@ -4,7 +4,6 @@ import {
     View,
     Text,
     SafeAreaView,
-    FlatList,
     StatusBar,
     ScrollView,
     TouchableOpacity
@@ -19,9 +18,9 @@ interface Props {
 }
 
 const UserQrCodes: FC<Props> = (props) => {
-    const [userQRCodes, setUserQRCodes] = useState();
-    const [collectionViewState, setCollectionViewState] = useState<boolean | null>(true);
-    const [QRCodeValue, setQRCodeValue] = useState<string | null>();
+    const [userQRCodes, setUserQRCodes] = useState<Array<{ id: string, qrCodeData: string }>>();
+    const [collectionViewState, setCollectionViewState] = useState<boolean | undefined>(true);
+    const [QRCodeValue, setQRCodeValue] = useState<string | undefined>();
     useEffect(() => {
         getAndSaveQRCodes()
 
@@ -29,28 +28,23 @@ const UserQrCodes: FC<Props> = (props) => {
 
     async function getAndSaveQRCodes() {
 
-        let data = await storageServices.getQRCodes();
+        let userQRCodes = await storageServices.getQRCodes();
+        if (userQRCodes) setUserQRCodes(userQRCodes.data);
 
-        if (await data) {
-            console.log(data.data.length)
-            setUserQRCodes(prev => data.data);
-        }
     }
 
-    const deleteQRCode = (qrcode) => {
+    const deleteQRCode = (qrcode: string) => {
 
-        storageServices.deleteQRCode(qrcode).then(res => {
-            setCollectionViewState(prev => true);
-            getAndSaveQRCodes()
-
+        storageServices.deleteQRCode(qrcode).then(() => {
+            setCollectionViewState(true);
 
         }).catch(err => {
             console.log(err);
         })
     }
-    const showQRData = (qrData) => {
-        setQRCodeValue(prev => qrData);
-        setCollectionViewState(prev => false);
+    const showPressedQRCodeData = (qrData: string) => {
+        setQRCodeValue(qrData);
+        setCollectionViewState(false);
     }
 
     return (
@@ -69,7 +63,7 @@ const UserQrCodes: FC<Props> = (props) => {
                             </View>
                         </TouchableOpacity>
                         {
-                            userQRCodes?.length > 0 ?
+                            userQRCodes && userQRCodes.length > 0 ?
                                 userQRCodes.map(item => {
                                     return (
                                         <ScrollView key={item.id}>
@@ -91,7 +85,7 @@ const UserQrCodes: FC<Props> = (props) => {
 
                                                     <Text style={{ alignSelf: 'center', top: 45 }}>Delete</Text>
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => showQRData(item?.qrCodeData)}>
+                                                <TouchableOpacity onPress={() => showPressedQRCodeData(item?.qrCodeData)}>
                                                     <QRCode
                                                         value={item?.qrCodeData}
                                                     />
@@ -104,7 +98,7 @@ const UserQrCodes: FC<Props> = (props) => {
                                 <Text style={{ fontSize: 30, top: 100, }}>Collection is empty</Text>}
                     </>
                     :
-                    <View style={{ justifyContant: 'center' }}>
+                    <View>
 
                         <QRCode
                             value={QRCodeValue}

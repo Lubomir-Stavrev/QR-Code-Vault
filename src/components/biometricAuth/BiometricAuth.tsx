@@ -36,23 +36,21 @@ const BiometricAuth: FC<Props> = (props) => {
 
     }, [])
 
-    const handleFailedAuthentication = (error) => {
+    const handleFailedAuthentication = (error: string | unknown) => {
         //handle error
         setErrorMessage("Something went worng");
     }
 
     const authenticateWithTouchID = () => {
+        try {
+            TouchID.authenticate('Authenticate', optionalConfigObject);
+            props.onSuccesfullAuthentication();
 
-        TouchID.authenticate('Authenticate', optionalConfigObject)
-            .then(success => {
-                props.onSuccesfullAuthentication();
-            })
-            .catch(error => {
-                handleFailedAuthentication(error);
-            });
-    }
+        } catch (error) {
+            handleFailedAuthentication(error);
+        }
 
-
+    };
 
     return (
         <View style={[styles.container, styles.horizontal]}>
@@ -73,8 +71,7 @@ const BiometricAuth: FC<Props> = (props) => {
             }
         </View>
     );
-};
-
+}
 const styles = StyleSheet.create({
     container: {
         flex: 1,

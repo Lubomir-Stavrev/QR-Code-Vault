@@ -5,34 +5,42 @@ import uuid from 'react-native-uuid';
 
 export default {
 
-    async addQRCode(qrCodeData) {
-        let prevData = await JSON.parse(await EncryptedStorage.getItem(qrStorageName));
-        let data;
+    async addQRCode(qrCodeData: string | undefined) {
+        let prevQRCodeData = await EncryptedStorage.getItem(qrStorageName);
 
-        if (await prevData) {
-            data = prevData.data;
+        if (!prevQRCodeData) return;
+
+        let parsedQRCodeData = await JSON.parse(prevQRCodeData);
+        let updatedDataForReturning;
+
+        if (await parsedQRCodeData) {
+            updatedDataForReturning = parsedQRCodeData.data;
         } else {
-            data = [];
+            updatedDataForReturning = [];
         }
 
-        data.push({
+        updatedDataForReturning.push({
             qrCodeData: qrCodeData,
             id: uuid.v4(),
         });
 
-        if (await data) {
+        if (updatedDataForReturning)
             return await EncryptedStorage.setItem(
                 qrStorageName,
                 JSON.stringify({
-                    data
+                    updatedDataForReturning
                 })
             );
-        }
+
     },
     async getQRCodes() {
+        let prevQRCodeData = await EncryptedStorage.getItem(qrStorageName);
+        if (!prevQRCodeData) return;
+        let parsedQRCodeData = await JSON.parse(prevQRCodeData);
         let data;
+
         try {
-            data = JSON.parse(await EncryptedStorage.getItem(qrStorageName));
+            data = JSON.parse(parsedQRCodeData);
 
             if (data !== undefined) {
 
@@ -43,9 +51,13 @@ export default {
         }
 
     },
-    async deleteQRCode(qrCodeId) {
-        let prevData = await JSON.parse(await EncryptedStorage.getItem(qrStorageName));
-        let data = prevData.data.filter(el => el.id != qrCodeId);
+    async deleteQRCode(qrCodeId: string) {
+
+        let prevQRCodeData = await EncryptedStorage.getItem(qrStorageName);
+        if (!prevQRCodeData) return;
+        let parsedQRCodeData = await JSON.parse(prevQRCodeData);
+
+        let data = parsedQRCodeData.data.filter((el: any) => el.id != qrCodeId);
 
         if (await data) {
             return await EncryptedStorage.setItem(

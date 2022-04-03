@@ -18,19 +18,12 @@ const QRCodeScan: FC<Props> = ({ goToOptions }) => {
     const windowHeight = Dimensions.get('window').height;
 
 
-    const saveQRCode = async (qrCodeData) => {
+    const saveQRCode = async (qrCodeData: string | undefined) => {
 
-        storageServices.addQRCode(qrCodeData).then(res => {
-
-            goToOptions()
-        }).catch(err => {
-            console.log(err);
-        })
-
-    }
-    const onSuccess = async (e) => {
-
-        saveQRCode(e.data);
+        if (qrCodeData) storageServices.addQRCode(qrCodeData).then(() => goToOptions())
+            .catch(err => {
+                console.log(err);
+            })
 
     }
     return (
@@ -39,7 +32,7 @@ const QRCodeScan: FC<Props> = ({ goToOptions }) => {
                 <QRCodeScanner
                     cameraStyle={{ height: windowHeight }}
                     showMarker
-                    onRead={(data) => onSuccess(data)}
+                    onRead={(data) => saveQRCode(data.data)}
 
                 />
             </View>
