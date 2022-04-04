@@ -10,23 +10,18 @@ interface QRData {
 
 export default {
   async addQRCode(qrCodeData: string | undefined) {
-    let prevQRCodeData: string | null = await EncryptedStorage.getItem(qrStorageName);
-    let newQRCodeData: QRData[]
-
-    if (prevQRCodeData) {
-      newQRCodeData = [
-        ...JSON.parse(prevQRCodeData),
-        {
-          qrCodeData: qrCodeData,
-          id: uuid.v4().toString(),
-        }
-      ];
-    } else {
-      newQRCodeData = [{
+    const prevQRCodeData: string | null = await EncryptedStorage.getItem(qrStorageName);
+    const newQRCodeData: QRData[] = prevQRCodeData ?
+      [...JSON.parse(prevQRCodeData),
+      {
+        qrCodeData: qrCodeData,
+        id: uuid.v4().toString(),
+      }]
+      :
+      [{
         qrCodeData: qrCodeData,
         id: uuid.v4().toString(),
       }];
-    }
 
     return await EncryptedStorage.setItem(
       qrStorageName,
@@ -34,24 +29,25 @@ export default {
     );
   },
   async getQRCodes() {
-    let prevQRCodeData = await EncryptedStorage.getItem(qrStorageName);
+    const prevQRCodeData = await EncryptedStorage.getItem(qrStorageName);
 
     if (!prevQRCodeData) {
       return;
     }
-    let parsedQRCodeData: QRData[] = JSON.parse(prevQRCodeData);
+    const parsedQRCodeData: QRData[] = JSON.parse(prevQRCodeData);
+
     return parsedQRCodeData;
 
   },
 
   async deleteQRCode(qrCodeId: string) {
-    let prevQRCodeData = await EncryptedStorage.getItem(qrStorageName);
+    const prevQRCodeData = await EncryptedStorage.getItem(qrStorageName);
     if (!prevQRCodeData) {
       return;
     }
-    let parsedQRCodeData: QRData[] = JSON.parse(prevQRCodeData);
+    const parsedQRCodeData: QRData[] = JSON.parse(prevQRCodeData);
 
-    let data = parsedQRCodeData.filter((el) => el.id !== qrCodeId);
+    const data = parsedQRCodeData.filter((el) => el.id !== qrCodeId);
 
     return await EncryptedStorage.setItem(
       qrStorageName,
