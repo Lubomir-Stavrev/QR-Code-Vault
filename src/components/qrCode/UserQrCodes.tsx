@@ -1,16 +1,15 @@
 import React, { useEffect, useState, FC } from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   SafeAreaView,
-  StatusBar,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
 
 import storageServices from '../../services/encryptedStorage';
 import QRCode from 'react-native-qrcode-svg';
+import styles from '../../styles/QRCodeStyles'
 
 interface Props {
   goToOptions: () => void;
@@ -36,7 +35,6 @@ const UserQrCodes: FC<Props> = props => {
     if (userQRCodes) {
       setUserQRCodes(userQRCodes);
     }
-
   }
 
   const deleteQRCode = (qrcode: string) => {
@@ -49,6 +47,7 @@ const UserQrCodes: FC<Props> = props => {
         console.log(err);
       });
   };
+
   const showPressedQRCodeData = (qrData: string | undefined) => {
     setQRCodeValue(qrData);
     setCollectionViewState(false);
@@ -56,21 +55,13 @@ const UserQrCodes: FC<Props> = props => {
 
   return (
     <>
-      <Text style={{ fontSize: 30 }}>QR Codes Collection</Text>
+      <Text style={styles.bigText}>QR Codes Collection</Text>
 
       <SafeAreaView style={styles.scrollViewContainer}>
         {collectionViewState ? (
           <>
             <TouchableOpacity
-              style={{
-                zIndex: 100,
-                left: 0,
-                bottom: '20%',
-                backgroundColor: '#ffff',
-                padding: 10,
-                position: 'absolute',
-                borderRadius: 10,
-              }}
+              style={{ ...styles.goBackButton, bottom: '20%' }}
               onPress={() => props.goToOptions()}>
               <View>
                 <Text style={{ color: 'black', fontSize: 20 }}>Go Back</Text>
@@ -81,22 +72,9 @@ const UserQrCodes: FC<Props> = props => {
                 return (
                   <ScrollView key={item.id}>
                     <View
-                      style={{
-                        padding: 10,
-                        backgroundColor: '#FFCC1D',
-                        marginBottom: 5,
-                        borderRadius: 5,
-                      }}>
+                      style={styles.qrCodeRow}>
                       <TouchableOpacity
-                        style={{
-                          position: 'absolute',
-                          backgroundColor: '#CD1818',
-                          height: 120,
-                          width: 60,
-                          borderTopRightRadius: 5,
-                          borderBottomRightRadius: 5,
-                          right: 0,
-                        }}
+                        style={styles.deleteButton}
                         onPress={() => deleteQRCode(item?.id)}>
                         <Text style={{ alignSelf: 'center', top: 45 }}>
                           Delete
@@ -118,26 +96,14 @@ const UserQrCodes: FC<Props> = props => {
           <View>
             <QRCode value={QRCodeValue} size={300} />
             <View
-              style={{
-                top: '5%',
-                backgroundColor: '#ffff',
-                padding: 20,
-                borderRadius: 10,
-              }}>
-              <Text style={{ color: 'black', fontSize: 20 }}>{QRCodeValue}</Text>
+              style={styles.qrCodeValueContainer}>
+              <Text style={styles.smallText}>{QRCodeValue}</Text>
             </View>
             <TouchableOpacity
-              style={{
-                left: 0,
-                bottom: '-20%',
-                backgroundColor: '#ffff',
-                padding: 10,
-                position: 'absolute',
-                borderRadius: 10,
-              }}
+              style={{ ...styles.goBackButton, bottom: '-20%' }}
               onPress={() => setCollectionViewState(true)}>
               <View>
-                <Text style={{ color: 'black', fontSize: 20 }}>Go Back</Text>
+                <Text style={styles.smallText}>Go Back</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -146,42 +112,4 @@ const UserQrCodes: FC<Props> = props => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
-  },
-  textBold: {
-    fontWeight: '500',
-    color: '#000',
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-  },
-  buttonTouchable: {
-    padding: 16,
-  },
-  container: {
-    flex: 1,
-    height: '100%',
-    alignItems: 'center',
-    backgroundColor: '#202020',
-  },
-  scrollViewContainer: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-  },
-  scrollView: {
-    backgroundColor: 'pink',
-    marginHorizontal: 20,
-  },
-  text: {
-    fontSize: 42,
-  },
-});
-
 export default UserQrCodes;

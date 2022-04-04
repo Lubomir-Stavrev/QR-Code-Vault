@@ -1,28 +1,25 @@
-import React, {useState, FC} from 'react';
+import React, { useState, FC } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  Dimensions,
 } from 'react-native';
 
 import PinCodeBackupAuth from '../../components/pinCodeBackupAuth/PinCodeBackup';
 import BiometricAuth from '../../components/biometricAuth/BiometricAuth';
+import authStyles from '../../styles/AuthStyles'
 
 import TouchID from 'react-native-touch-id';
 
 interface Props {
-  navigation: {navigate: (text: string) => void};
+  navigation: { navigate: (text: string) => void };
 }
+
 const Authentication: FC<Props> = props => {
   const [isBiometricSignIn, setIsBiometricSignIn] = useState<boolean | null>(
     false,
   );
   const [isSignedIn, setIsSignedIn] = useState<boolean | null>(false);
-
-  const windowHeight = Dimensions.get('window').height;
-  const windowWidth = Dimensions.get('window').width;
 
   const isBiometricSignInSupported = () => {
     TouchID.isSupported()
@@ -50,29 +47,18 @@ const Authentication: FC<Props> = props => {
   };
 
   return (
-    <View style={styles.authContainer}>
-      <View style={{top: '5%'}}>
+    <View style={authStyles.authContainer}>
+      <View>
         {!isSignedIn ? (
           <View
-            style={{
-              flex: 1,
-              height: windowHeight,
-              width: windowWidth,
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 35,
-                letterSpacing: 1,
-                color: 'white',
-                fontFamily: 'Roboto',
-              }}>
+            style={authStyles.authTitleContainer}>
+            <Text style={authStyles.authTitleText}>
               QR Code Vault
             </Text>
-            <View style={{flex: 1, marginTop: '20%', alignItems: 'center'}}>
+            <View style={authStyles.signInButtonContainer}>
               <TouchableOpacity onPress={() => isBiometricSignInSupported()}>
-                <View style={styles.buttonContainer}>
-                  <Text style={styles.buttonText}>Sign in</Text>
+                <View style={authStyles.button}>
+                  <Text style={authStyles.buttonText}>Sign in</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -92,48 +78,6 @@ const Authentication: FC<Props> = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  pinContainerStyle: {
-    fontSize: 30,
-    fontWeight: '600',
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  authContainer: {
-    flex: 1,
-    height: '100%',
-    alignItems: 'center',
-    backgroundColor: '#202020',
-  },
-  buttonContainer: {
-    backgroundColor: '#01a3ea',
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    margin: 10,
-    width: '100%',
-    padding: 10,
-    paddingTop: 15,
-    paddingBottom: 15,
-  },
-  buttonText: {
-    fontWeight: '700',
-    fontFamily: 'Roboto',
-    color: '#ffff',
-    letterSpacing: 1,
-    fontSize: 22,
-  },
-});
+
 
 export default Authentication;

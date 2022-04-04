@@ -1,6 +1,5 @@
 import React, { useEffect, useState, FC } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
@@ -8,7 +7,7 @@ import {
 } from 'react-native';
 
 import TouchID from 'react-native-touch-id';
-
+import styles from '../../styles/AuthStyles';
 interface Props {
   handlePinCodeSignIn: () => void;
   onSuccesfullAuthentication: () => void;
@@ -43,34 +42,17 @@ const BiometricAuth: FC<Props> = props => {
   };
 
   return (
-    <View style={[styles.container, styles.horizontal]}>
+    <View style={[styles.authContainer, styles.horizontal]}>
       {errorMessage ? (
-        <View
-          style={{
-            height: '100%',
-            alignItems: 'center',
-          }}>
+        <View>
           <Text
-            style={{
-              fontFamily: 'Roboto',
-              letterSpacing: 1,
-              fontWeight: '900',
-              marginTop: '10%',
-              marginBottom: '10%',
-              fontSize: 30,
-              color: '#ffff',
-            }}>
+            style={styles.errorMessage}>
             {errorMessage}
           </Text>
           <TouchableOpacity onPress={() => props.handlePinCodeSignIn()}>
             <View style={styles.button}>
               <Text
-                style={{
-                  letterSpacing: 1,
-                  color: '#ffff',
-                  fontSize: 25,
-                  fontWeight: '900',
-                }}>
+                style={styles.signInButton}>
                 Sign In with pin code
               </Text>
             </View>
@@ -82,25 +64,5 @@ const BiometricAuth: FC<Props> = props => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  horizontal: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 10,
-  },
-  button: {
-    borderRadius: 5,
-    backgroundColor: '#FFCC1D',
-    color: '#ffff',
-    justifyContant: 'center',
-    padding: 10,
-    paddingTop: 15,
-    paddingBottom: 15,
-  },
-});
 
 export default BiometricAuth;
