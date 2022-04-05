@@ -1,13 +1,9 @@
-import React, { useState, FC, useEffect } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useState, FC} from 'react';
+import {Text, View, TouchableOpacity} from 'react-native';
 
 import QRCodeScan from './QRCodeScan';
 import UserQrCodes from './UserQrCodes';
-import styles from '../../styles/QRCodeStyles'
+import styles from '../../styles/QRCodeStyles';
 
 const QRCodeRoute: FC = () => {
   const [optionsViewState, setOptionViewState] = useState<boolean | null>(true);
@@ -19,21 +15,16 @@ const QRCodeRoute: FC = () => {
   };
 
   const goToOptions = () => {
-
     setOptionViewState(true);
   };
 
   return (
     <View style={styles.qrContainer}>
-      <View >
+      <View>
         {optionsViewState ? (
-          <View
-            style={styles.qrMenuContainer}>
-            <Text
-              style={styles.qrMenuTitle}>
-              QR Code Vault
-            </Text>
-            <View >
+          <View style={styles.qrMenuContainer}>
+            <Text style={styles.qrMenuTitle}>QR Code Vault</Text>
+            <View>
               <TouchableOpacity onPress={() => handleQRCodeOptionPressed(true)}>
                 <View style={styles.menuButtonContainer}>
                   <Text style={styles.menuButtonText}>Scan QR CODE</Text>
@@ -42,7 +33,9 @@ const QRCodeRoute: FC = () => {
               <TouchableOpacity
                 onPress={() => handleQRCodeOptionPressed(false)}>
                 <View style={styles.menuButtonContainer}>
-                  <Text style={styles.menuButtonText}>View QR code collection</Text>
+                  <Text style={styles.menuButtonText}>
+                    View QR code collection
+                  </Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -56,7 +49,5 @@ const QRCodeRoute: FC = () => {
     </View>
   );
 };
-
-
 
 export default QRCodeRoute;

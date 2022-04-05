@@ -1,18 +1,14 @@
-import React, { useState, FC } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useState, FC} from 'react';
+import {Text, View, TouchableOpacity} from 'react-native';
 
 import PinCodeBackupAuth from '../../components/pinCodeBackupAuth/PinCodeBackup';
 import BiometricAuth from '../../components/biometricAuth/BiometricAuth';
-import authStyles from '../../styles/AuthStyles'
+import authStyles from '../../styles/AuthStyles';
 
 import TouchID from 'react-native-touch-id';
 
 interface Props {
-  navigation: { navigate: (text: string) => void };
+  navigation: {navigate: (text: string) => void};
 }
 
 const Authentication: FC<Props> = props => {
@@ -53,11 +49,8 @@ const Authentication: FC<Props> = props => {
     <View style={authStyles.authContainer}>
       <View>
         {!isSignedIn ? (
-          <View
-            style={authStyles.authTitleContainer}>
-            <Text style={authStyles.authTitleText}>
-              QR Code Vault
-            </Text>
+          <View style={authStyles.authTitleContainer}>
+            <Text style={authStyles.authTitleText}>QR Code Vault</Text>
             <View style={authStyles.signInButtonContainer}>
               <TouchableOpacity onPress={() => isBiometricSignInSupported()}>
                 <View style={authStyles.button}>
@@ -80,7 +73,5 @@ const Authentication: FC<Props> = props => {
     </View>
   );
 };
-
-
 
 export default Authentication;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from 'react';
+import React, {useEffect, useState, FC} from 'react';
 import {
   View,
   Text,
@@ -10,7 +10,7 @@ import {
 import storageServices from '../../services/encryptedStorage';
 import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
-import styles from '../../styles/QRCodeStyles'
+import styles from '../../styles/QRCodeStyles';
 
 interface Props {
   goToOptions: () => void;
@@ -21,28 +21,26 @@ interface QRData {
   id: string;
 }
 
-const UserQrCodes: FC<Props> = ({ goToOptions }) => {
+const UserQrCodes: FC<Props> = ({goToOptions}) => {
   const [userQRCodes, setUserQRCodes] = useState<QRData[]>();
-  const [collectionViewState, setCollectionViewState] = useState<boolean | undefined>(true);
+  const [collectionViewState, setCollectionViewState] = useState<
+    boolean | undefined
+  >(true);
   const [QRCodeValue, setQRCodeValue] = useState<string | undefined>();
 
-  const [hasGetAndSaveQRCodesFailed, setHasGetAndSaveQRCodesFailed] = useState<boolean | null>(false);
+  const [hasGetAndSaveQRCodesFailed, setHasGetAndSaveQRCodesFailed] = useState<
+    boolean | null
+  >(false);
   const [errorMessage, setErrorMessage] = useState<string | null>();
 
   useEffect(() => {
-
-    getAndSaveQRCodes()
-      .catch(() => {
-        setHasGetAndSaveQRCodesFailed(true);
-        setErrorMessage("Couldn't get QR codes collection.");
-      });
-
-
-
+    getAndSaveQRCodes().catch(() => {
+      setHasGetAndSaveQRCodesFailed(true);
+      setErrorMessage("Couldn't get QR codes collection.");
+    });
   }, []);
 
   async function getAndSaveQRCodes() {
-
     let userQRCodes: QRData[] | undefined = await storageServices.getQRCodes();
     if (userQRCodes) {
       setUserQRCodes(userQRCodes);
@@ -68,37 +66,38 @@ const UserQrCodes: FC<Props> = ({ goToOptions }) => {
   return (
     <>
       <Text style={styles.bigText}>QR Codes Collection</Text>
-      {hasGetAndSaveQRCodesFailed ?
-        Snackbar.show({
-          text: errorMessage ?? "Something went wrong",
-          duration: Snackbar.LENGTH_INDEFINITE,
-          action: {
-            text: 'go to menu',
-            textColor: 'green',
-            onPress: () => { goToOptions() },
-          }
-        })
+      {hasGetAndSaveQRCodesFailed
+        ? Snackbar.show({
+            text: errorMessage ?? 'Something went wrong',
+            duration: Snackbar.LENGTH_INDEFINITE,
+            action: {
+              text: 'go to menu',
+              textColor: 'green',
+              onPress: () => {
+                goToOptions();
+              },
+            },
+          })
         : null}
       <SafeAreaView style={styles.scrollViewContainer}>
         {collectionViewState ? (
           <>
             <TouchableOpacity
-              style={{ ...styles.goBackButton, bottom: '20%' }}
+              style={{...styles.goBackButton, bottom: '20%'}}
               onPress={() => goToOptions()}>
               <View>
-                <Text style={{ color: 'black', fontSize: 20 }}>Go Back</Text>
+                <Text style={{color: 'black', fontSize: 20}}>Go Back</Text>
               </View>
             </TouchableOpacity>
             {userQRCodes && userQRCodes.length > 0 ? (
               userQRCodes.map(item => {
                 return (
                   <ScrollView key={item.id}>
-                    <View
-                      style={styles.qrCodeRow}>
+                    <View style={styles.qrCodeRow}>
                       <TouchableOpacity
                         style={styles.deleteButton}
                         onPress={() => deleteQRCode(item?.id)}>
-                        <Text style={{ alignSelf: 'center', top: 45 }}>
+                        <Text style={{alignSelf: 'center', top: 45}}>
                           Delete
                         </Text>
                       </TouchableOpacity>
@@ -111,18 +110,17 @@ const UserQrCodes: FC<Props> = ({ goToOptions }) => {
                 );
               })
             ) : (
-              <Text style={{ fontSize: 30, top: 100 }}>Collection is empty</Text>
+              <Text style={{fontSize: 30, top: 100}}>Collection is empty</Text>
             )}
           </>
         ) : (
           <View>
             <QRCode value={QRCodeValue} size={300} />
-            <View
-              style={styles.qrCodeValueContainer}>
+            <View style={styles.qrCodeValueContainer}>
               <Text style={styles.smallText}>{QRCodeValue}</Text>
             </View>
             <TouchableOpacity
-              style={{ ...styles.goBackButton, bottom: '-20%' }}
+              style={{...styles.goBackButton, bottom: '-20%'}}
               onPress={() => setCollectionViewState(true)}>
               <View>
                 <Text style={styles.smallText}>Go Back</Text>

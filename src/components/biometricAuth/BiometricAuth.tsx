@@ -1,10 +1,5 @@
-import React, { useEffect, useState, FC } from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import React, {useEffect, useState, FC} from 'react';
+import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 
 import TouchID from 'react-native-touch-id';
 import styles from '../../styles/AuthStyles';
@@ -30,37 +25,28 @@ const BiometricAuth: FC<Props> = props => {
   };
 
   useEffect(() => {
-
     TouchID.authenticate('Authenticate', optionalConfigObject)
       .then(() => props.onSuccesfullAuthentication())
       .catch((err: Error) => {
         handleFailedAuthentication(err.message);
       });
-
   }, []);
 
   const handleFailedAuthentication = (errorMessage: string) => {
     setHasError(true);
-    if (errorMessage !== "User canceled authentication") {
+    if (errorMessage !== 'User canceled authentication') {
       setErrorMessage('Something went worng');
     }
-
   };
 
   return (
     <View style={[styles.authContainer, styles.horizontal]}>
       {hasError ? (
         <View>
-          <Text
-            style={styles.errorMessage}>
-            {errorMessage}
-          </Text>
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
           <TouchableOpacity onPress={() => props.handlePinCodeSignIn()}>
             <View style={styles.button}>
-              <Text
-                style={styles.signInButton}>
-                Sign In with pin code
-              </Text>
+              <Text style={styles.signInButton}>Sign In with pin code</Text>
             </View>
           </TouchableOpacity>
         </View>
