@@ -17,8 +17,8 @@ const QRCodeScan: FC<Props> = ({ goToOptions }) => {
       storageServices
         .addQRCode(qrCodeData)
         .then(() => goToOptions())
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
+          throw new Error("QR code didn't saved correctly")
         });
     }
   };

@@ -32,7 +32,10 @@ const Authentication: FC<Props> = props => {
           console.log('TouchID is supported.');
         }
       })
-      .catch(error => {
+      .catch(() => {
+        // User's phone doesn't support biometric authentication
+        // Or user canceled the biometric authentication
+        // So here we set that the user didn't sign-in successfully
         setIsBiometricSignIn(false);
       });
     setIsSignedIn(true);

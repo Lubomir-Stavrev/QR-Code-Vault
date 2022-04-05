@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import {
   Text,
   View,
@@ -13,13 +13,17 @@ const QRCodeRoute: FC = () => {
   const [optionsViewState, setOptionViewState] = useState<boolean | null>(true);
   const [isAddQRCode, setIsAddQRCode] = useState<boolean | null>(false);
 
-
+  useEffect(() => {
+    throw new Error("asd");
+  })
   const handleQRCodeOptionPressed = (isAddQRCodeState: boolean) => {
+
     setIsAddQRCode(isAddQRCodeState);
     setOptionViewState(false);
   };
 
   const goToOptions = () => {
+
     setOptionViewState(true);
   };
 

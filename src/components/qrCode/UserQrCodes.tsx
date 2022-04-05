@@ -26,7 +26,12 @@ const UserQrCodes: FC<Props> = props => {
   const [QRCodeValue, setQRCodeValue] = useState<string | undefined>();
 
   useEffect(() => {
-    getAndSaveQRCodes();
+    try {
+      getAndSaveQRCodes();
+    } catch (error) {
+
+      throw new Error("Couldn't get QR codes collection.")
+    }
   }, []);
 
   async function getAndSaveQRCodes() {

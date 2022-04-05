@@ -17,19 +17,19 @@ const PinCodeBackup: FC<Props> = props => {
   useEffect(() => {
     async function isPinCodeSetted() {
       try {
-        let result = await hasUserSetPinCode(pinCodeKeychainName);
+        const result = await hasUserSetPinCode(pinCodeKeychainName);
         if (result) {
           setIsPinCodeSettedByUser(result);
         }
       } catch (err) {
-        //handle ERROR
-        console.log(err);
+        throw new Error("Pin validation failed.")
       }
     }
     isPinCodeSetted();
   }, []);
 
   const savePinInKeyChain = (pin: string | undefined) => {
+
     try {
       if (pin) {
         Keychain.setInternetCredentials(
@@ -39,8 +39,7 @@ const PinCodeBackup: FC<Props> = props => {
         );
       }
     } catch (error) {
-      //handle error
-      console.log("Keychain couldn't be accessed!", error);
+      throw new Error("Pin login failed.")
     }
   };
 

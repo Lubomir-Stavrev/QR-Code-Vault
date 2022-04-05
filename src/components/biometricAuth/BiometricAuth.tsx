@@ -15,6 +15,7 @@ interface Props {
 
 const BiometricAuth: FC<Props> = props => {
   const [errorMessage, setErrorMessage] = useState<string | null>();
+  const [hasError, setHasError] = useState(false);
 
   const optionalConfigObject = {
     title: 'Authentication Required',
@@ -29,21 +30,27 @@ const BiometricAuth: FC<Props> = props => {
   };
 
   useEffect(() => {
-    try {
-      TouchID.authenticate('Authenticate', optionalConfigObject);
-      props.onSuccesfullAuthentication();
-    } catch (error) {
-      handleFailedAuthentication(error);
-    }
+
+    TouchID.authenticate('Authenticate', optionalConfigObject)
+      .then(() => props.onSuccesfullAuthentication())
+      .catch((err: Error) => {
+        console.log(err.message);
+        handleFailedAuthentication(err.message)
+      });
+
   }, []);
 
-  const handleFailedAuthentication = (error: string | unknown) => {
-    setErrorMessage('Something went worng');
+  const handleFailedAuthentication = (errorMessage: string) => {
+    setHasError(true);
+    if (errorMessage !== "User canceled authentication") {
+      setErrorMessage('Something went worng');
+    }
+
   };
 
   return (
     <View style={[styles.authContainer, styles.horizontal]}>
-      {errorMessage ? (
+      {hasError ? (
         <View>
           <Text
             style={styles.errorMessage}>
