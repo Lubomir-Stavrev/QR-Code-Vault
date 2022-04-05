@@ -2,7 +2,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
-export default authStyles = StyleSheet.create({
+export default StyleSheet.create({
   errorPageContainer: {
     backgroundColor: '#202020',
     flex: 1,

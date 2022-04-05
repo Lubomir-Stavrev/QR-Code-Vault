@@ -41,9 +41,10 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
   }, []);
 
   async function getAndSaveQRCodes() {
-    let userQRCodes: QRData[] | undefined = await storageServices.getQRCodes();
-    if (userQRCodes) {
-      setUserQRCodes(userQRCodes);
+    let userQRCodesCollection: QRData[] | undefined =
+      await storageServices.getQRCodes();
+    if (userQRCodesCollection) {
+      setUserQRCodes(userQRCodesCollection);
     }
   }
 
@@ -83,10 +84,10 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
         {collectionViewState ? (
           <>
             <TouchableOpacity
-              style={{...styles.goBackButton, bottom: '20%'}}
+              style={styles.goBackButton}
               onPress={() => goToOptions()}>
               <View>
-                <Text style={{color: 'black', fontSize: 20}}>Go Back</Text>
+                <Text>Go Back</Text>
               </View>
             </TouchableOpacity>
             {userQRCodes && userQRCodes.length > 0 ? (
@@ -97,9 +98,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
                       <TouchableOpacity
                         style={styles.deleteButton}
                         onPress={() => deleteQRCode(item?.id)}>
-                        <Text style={{alignSelf: 'center', top: 45}}>
-                          Delete
-                        </Text>
+                        <Text>Delete</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
                         onPress={() => showPressedQRCodeData(item?.qrCodeData)}>
@@ -110,7 +109,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
                 );
               })
             ) : (
-              <Text style={{fontSize: 30, top: 100}}>Collection is empty</Text>
+              <Text>Collection is empty</Text>
             )}
           </>
         ) : (
@@ -120,7 +119,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
               <Text style={styles.smallText}>{QRCodeValue}</Text>
             </View>
             <TouchableOpacity
-              style={{...styles.goBackButton, bottom: '-20%'}}
+              style={styles.goBackButton}
               onPress={() => setCollectionViewState(true)}>
               <View>
                 <Text style={styles.smallText}>Go Back</Text>

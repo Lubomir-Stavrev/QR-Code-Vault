@@ -61,9 +61,8 @@ const PinCodeBackup: FC<Props> = props => {
             callbackErrorTouchId={e => console.log(e)}
             alphabetCharsVisible={false}
             iconButtonDeleteDisabled={true}
-            stylePinCodeDeleteButtonText={{...styles.pinText, marginTop: '30%'}}
+            stylePinCodeDeleteButtonText={styles.pinText}
             stylePinCodeTextButtonCircle={styles.pinText}
-            stylePinCodeCircle={{width: 20, height: 5}}
             colorCircleButtons={'rgba(75,75,75,1)'}
             passwordLength={defaultPasswordLength}
             stylePinCodeTextTitle={styles.pinText}
@@ -77,9 +76,8 @@ const PinCodeBackup: FC<Props> = props => {
           <PINCode
             alphabetCharsVisible={false}
             iconButtonDeleteDisabled={true}
-            stylePinCodeDeleteButtonText={{...styles.pinText, marginTop: '30%'}}
+            stylePinCodeDeleteButtonText={styles.pinText}
             stylePinCodeTextButtonCircle={styles.pinText}
-            stylePinCodeCircle={{width: 20, height: 5}}
             colorCircleButtons={'rgba(70,70,70,1)'}
             passwordLength={defaultPasswordLength}
             stylePinCodeTextTitle={styles.pinText}

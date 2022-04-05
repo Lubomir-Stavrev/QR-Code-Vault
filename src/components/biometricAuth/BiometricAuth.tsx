@@ -30,11 +30,11 @@ const BiometricAuth: FC<Props> = props => {
       .catch((err: Error) => {
         handleFailedAuthentication(err.message);
       });
-  }, []);
+  });
 
-  const handleFailedAuthentication = (errorMessage: string) => {
+  const handleFailedAuthentication = (error: string) => {
     setHasError(true);
-    if (errorMessage !== 'User canceled authentication') {
+    if (error !== 'User canceled authentication') {
       setErrorMessage('Something went worng');
     }
   };
