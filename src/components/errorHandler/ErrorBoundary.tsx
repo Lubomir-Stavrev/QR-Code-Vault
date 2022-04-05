@@ -15,17 +15,15 @@ interface Props {
 
 interface State {
     hasError: boolean;
-    errorMessage: string;
 }
 
 class ErrorBoundary extends Component<Props, State> {
     public state: State = {
         hasError: false,
-        errorMessage: '',
     };
 
     public static getDerivedStateFromError(error: Error): State {
-        return { hasError: true, errorMessage: error.message };
+        return { hasError: true };
     }
 
     public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -38,14 +36,11 @@ class ErrorBoundary extends Component<Props, State> {
                 <View style={styles.errorPageContainer}>
                     <View style={styles.errorTextContainer}>
                         <Text style={styles.errorText}>
-                            {this.state.errorMessage
-                                ? this.state.errorMessage
-                                : "Something went wrong"
-                            }
+                            Something went wrong
                         </Text>
                         <View>
                             <TouchableOpacity onPress={() => RNRestart.Restart()}>
-                                <Text style={styles.tryAgainText}>Try Again</Text>
+                                <Text style={styles.resetButton}>Restart</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

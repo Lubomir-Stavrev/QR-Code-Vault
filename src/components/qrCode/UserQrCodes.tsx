@@ -9,6 +9,7 @@ import {
 
 import storageServices from '../../services/encryptedStorage';
 import QRCode from 'react-native-qrcode-svg';
+import Snackbar from 'react-native-snackbar';
 import styles from '../../styles/QRCodeStyles'
 
 interface Props {
@@ -20,18 +21,24 @@ interface QRData {
   id: string;
 }
 
-const UserQrCodes: FC<Props> = props => {
+const UserQrCodes: FC<Props> = ({ goToOptions }) => {
   const [userQRCodes, setUserQRCodes] = useState<QRData[]>();
   const [collectionViewState, setCollectionViewState] = useState<boolean | undefined>(true);
   const [QRCodeValue, setQRCodeValue] = useState<string | undefined>();
 
-  useEffect(() => {
-    try {
-      getAndSaveQRCodes();
-    } catch (error) {
+  const [hasGetAndSaveQRCodesFailed, setHasGetAndSaveQRCodesFailed] = useState<boolean | null>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>();
 
-      throw new Error("Couldn't get QR codes collection.")
-    }
+  useEffect(() => {
+
+    getAndSaveQRCodes()
+      .catch(() => {
+        setHasGetAndSaveQRCodesFailed(true);
+        setErrorMessage("Couldn't get QR codes collection.");
+      });
+
+
+
   }, []);
 
   async function getAndSaveQRCodes() {
@@ -61,13 +68,23 @@ const UserQrCodes: FC<Props> = props => {
   return (
     <>
       <Text style={styles.bigText}>QR Codes Collection</Text>
-
+      {hasGetAndSaveQRCodesFailed ?
+        Snackbar.show({
+          text: errorMessage ?? "Something went wrong",
+          duration: Snackbar.LENGTH_INDEFINITE,
+          action: {
+            text: 'go to menu',
+            textColor: 'green',
+            onPress: () => { goToOptions() },
+          }
+        })
+        : null}
       <SafeAreaView style={styles.scrollViewContainer}>
         {collectionViewState ? (
           <>
             <TouchableOpacity
               style={{ ...styles.goBackButton, bottom: '20%' }}
-              onPress={() => props.goToOptions()}>
+              onPress={() => goToOptions()}>
               <View>
                 <Text style={{ color: 'black', fontSize: 20 }}>Go Back</Text>
               </View>

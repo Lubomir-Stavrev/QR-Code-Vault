@@ -35,7 +35,7 @@ const Authentication: FC<Props> = props => {
       .catch(() => {
         // User's phone doesn't support biometric authentication
         // Or user canceled the biometric authentication
-        // So here we set that the user didn't sign-in successfully
+        // So here we set that the user didn't signed-in successfully
         setIsBiometricSignIn(false);
       });
     setIsSignedIn(true);

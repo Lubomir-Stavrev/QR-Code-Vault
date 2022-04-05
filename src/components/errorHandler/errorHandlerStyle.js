@@ -19,7 +19,7 @@ export default authStyles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontWeight: '900'
     },
-    tryAgainText: {
+    resetButton: {
         fontSize: 25,
         color: "white"
     }

@@ -1,16 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { View, Dimensions } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import storageServices from '../../services/encryptedStorage';
+import Snackbar from 'react-native-snackbar';
 import styles from '../../styles/QRCodeStyles'
+
 interface Props {
   goToOptions: () => void;
 }
+const windowHeight = Dimensions.get('window').height;
 
 const QRCodeScan: FC<Props> = ({ goToOptions }) => {
-  const windowHeight = Dimensions.get('window').height;
-
+  const [hasQRCodeSavingFailed, setHasQRCodeSavingFailed] = useState<boolean | null>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>();
   const saveQRCode = async (qrCodeData: string | undefined) => {
 
     if (qrCodeData) {
@@ -18,7 +21,8 @@ const QRCodeScan: FC<Props> = ({ goToOptions }) => {
         .addQRCode(qrCodeData)
         .then(() => goToOptions())
         .catch(() => {
-          throw new Error("QR code didn't saved correctly")
+          setHasQRCodeSavingFailed(true);
+          setErrorMessage("QR code didn't saved correctly")
         });
     }
   };
@@ -30,6 +34,17 @@ const QRCodeScan: FC<Props> = ({ goToOptions }) => {
           showMarker
           onRead={data => saveQRCode(data.data)}
         />
+        {hasQRCodeSavingFailed ?
+          Snackbar.show({
+            text: errorMessage ?? "Something went wrong",
+            duration: Snackbar.LENGTH_INDEFINITE,
+            action: {
+              text: 'go to menu',
+              textColor: 'green',
+              onPress: () => { goToOptions() },
+            }
+          })
+          : null}
       </View>
     </View>
   );

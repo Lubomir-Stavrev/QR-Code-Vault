@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import * as Keychain from 'react-native-keychain';
 import PINCode, { hasUserSetPinCode } from '@haskkor/react-native-pincode';
 import styles from '../../styles/AuthStyles'
-
+import Snackbar from 'react-native-snackbar';
 const pinCodeKeychainName = 'pincode';
 const defaultPasswordLength = 6;
 
@@ -13,7 +13,9 @@ interface Props {
 
 const PinCodeBackup: FC<Props> = props => {
   const [isPinCodeSettedByUser, setIsPinCodeSettedByUser] = useState<boolean | null>(false);
-
+  const [hasPinCodeValidationFailed, setHasPinCodeValidationFailed] = useState<boolean | null>(false);
+  const [hasPinCodeSignUpFailed, setHasPinCodeSignUpFailed] = useState<boolean | null>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>()
   useEffect(() => {
     async function isPinCodeSetted() {
       try {
@@ -22,7 +24,9 @@ const PinCodeBackup: FC<Props> = props => {
           setIsPinCodeSettedByUser(result);
         }
       } catch (err) {
-        throw new Error("Pin validation failed.")
+        setIsPinCodeSettedByUser(false);
+        setErrorMessage("Pin code validation failed");
+        setHasPinCodeValidationFailed(true);
       }
     }
     isPinCodeSetted();
@@ -30,19 +34,19 @@ const PinCodeBackup: FC<Props> = props => {
 
   const savePinInKeyChain = (pin: string | undefined) => {
 
-    try {
-      if (pin) {
-        Keychain.setInternetCredentials(
-          pinCodeKeychainName,
-          pinCodeKeychainName,
-          pin,
-        );
-      }
-    } catch (error) {
-      throw new Error("Pin login failed.")
+    if (pin) {
+      Keychain.setInternetCredentials(
+        pinCodeKeychainName,
+        pinCodeKeychainName,
+        pin,
+      ).then(() => setIsPinCodeSettedByUser(true));
     }
   };
 
+  const handleFailedSignUp = () => {
+    setHasPinCodeSignUpFailed(true);
+    setErrorMessage("Pin code SignUp failed.");
+  }
 
   return (
     <>
@@ -64,20 +68,30 @@ const PinCodeBackup: FC<Props> = props => {
           />
         </>
       ) : (
-        <PINCode
-          alphabetCharsVisible={false}
-          iconButtonDeleteDisabled={true}
-          stylePinCodeDeleteButtonText={{ ...styles.pinText, marginTop: '30%', }}
-          stylePinCodeTextButtonCircle={styles.pinText}
-          stylePinCodeCircle={{ width: 20, height: 5 }}
-          colorCircleButtons={'rgba(70,70,70,1)'}
-          passwordLength={defaultPasswordLength}
-          stylePinCodeTextTitle={styles.pinText}
-          styleLockScreenTitle={styles.pinText}
-          status={'choose'}
-          stylePinCodeTextSubtitle={styles.pinText}
-          finishProcess={pin => savePinInKeyChain(pin)}
-        />
+        <>
+          <PINCode
+            alphabetCharsVisible={false}
+            iconButtonDeleteDisabled={true}
+            stylePinCodeDeleteButtonText={{ ...styles.pinText, marginTop: '30%', }}
+            stylePinCodeTextButtonCircle={styles.pinText}
+            stylePinCodeCircle={{ width: 20, height: 5 }}
+            colorCircleButtons={'rgba(70,70,70,1)'}
+            passwordLength={defaultPasswordLength}
+            stylePinCodeTextTitle={styles.pinText}
+            styleLockScreenTitle={styles.pinText}
+            status={'choose'}
+            stylePinCodeTextSubtitle={styles.pinText}
+            onFail={() => handleFailedSignUp()}
+            finishProcess={pin => savePinInKeyChain(pin)
+            }
+          />
+          {hasPinCodeValidationFailed || hasPinCodeSignUpFailed ?
+            Snackbar.show({
+              text: errorMessage ?? "Something went wrong",
+              duration: Snackbar.LENGTH_LONG,
+            })
+            : null}
+        </>
       )}
     </>
   );

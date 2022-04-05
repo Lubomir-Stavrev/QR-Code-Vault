@@ -13,11 +13,7 @@ const QRCodeRoute: FC = () => {
   const [optionsViewState, setOptionViewState] = useState<boolean | null>(true);
   const [isAddQRCode, setIsAddQRCode] = useState<boolean | null>(false);
 
-  useEffect(() => {
-    throw new Error("asd");
-  })
   const handleQRCodeOptionPressed = (isAddQRCodeState: boolean) => {
-
     setIsAddQRCode(isAddQRCodeState);
     setOptionViewState(false);
   };

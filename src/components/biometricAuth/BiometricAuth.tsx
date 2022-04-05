@@ -34,8 +34,7 @@ const BiometricAuth: FC<Props> = props => {
     TouchID.authenticate('Authenticate', optionalConfigObject)
       .then(() => props.onSuccesfullAuthentication())
       .catch((err: Error) => {
-        console.log(err.message);
-        handleFailedAuthentication(err.message)
+        handleFailedAuthentication(err.message);
       });
 
   }, []);
