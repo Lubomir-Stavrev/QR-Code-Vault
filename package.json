@@ -29,7 +29,8 @@
         "react-native-snackbar": "^2.4.0",
         "react-native-svg": "^12.3.0",
         "react-native-touch-id": "^4.4.1",
-        "react-native-uuid": "^2.0.1"
+        "react-native-uuid": "^2.0.1",
+        "react-query": "^3.34.19"
     },
     "devDependencies": {
         "@babel/core": "^7.12.9",

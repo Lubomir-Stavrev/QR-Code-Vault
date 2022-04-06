@@ -11,6 +11,7 @@ interface Props {
 const BiometricAuth: FC<Props> = props => {
   const [errorMessage, setErrorMessage] = useState<string | null>();
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const optionalConfigObject = {
     title: 'Authentication Required',
@@ -26,8 +27,12 @@ const BiometricAuth: FC<Props> = props => {
 
   useEffect(() => {
     TouchID.authenticate('Authenticate', optionalConfigObject)
-      .then(() => props.onSuccesfullAuthentication())
+      .then(() => {
+        setIsLoading(false);
+        props.onSuccesfullAuthentication();
+      })
       .catch((err: Error) => {
+        setIsLoading(false);
         handleFailedAuthentication(err.message);
       });
   });
@@ -41,7 +46,9 @@ const BiometricAuth: FC<Props> = props => {
 
   return (
     <View style={[styles.authContainer, styles.horizontal]}>
-      {hasError ? (
+      {isLoading ? (
+        <ActivityIndicator size="large" />
+      ) : hasError ? (
         <View>
           <Text style={styles.errorMessage}>{errorMessage}</Text>
           <TouchableOpacity onPress={() => props.handlePinCodeSignIn()}>
@@ -50,9 +57,7 @@ const BiometricAuth: FC<Props> = props => {
             </View>
           </TouchableOpacity>
         </View>
-      ) : (
-        <ActivityIndicator size="large" />
-      )}
+      ) : null}
     </View>
   );
 };

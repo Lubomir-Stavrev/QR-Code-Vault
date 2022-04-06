@@ -1,9 +1,11 @@
 import React, {FC, useEffect, useState} from 'react';
+import {ActivityIndicator} from 'react-native';
 
 import * as Keychain from 'react-native-keychain';
 import PINCode, {hasUserSetPinCode} from '@haskkor/react-native-pincode';
 import styles from '../../styles/AuthStyles';
 import Snackbar from 'react-native-snackbar';
+
 const pinCodeKeychainName = 'pincode';
 const defaultPasswordLength = 6;
 
@@ -22,14 +24,18 @@ const PinCodeBackup: FC<Props> = props => {
     boolean | null
   >(false);
   const [errorMessage, setErrorMessage] = useState<string | null>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   useEffect(() => {
     async function isPinCodeSetted() {
       try {
         const result = await hasUserSetPinCode(pinCodeKeychainName);
+        setIsLoading(false);
         if (result) {
           setIsPinCodeSettedByUser(result);
         }
       } catch (err) {
+        setIsLoading(false);
         setIsPinCodeSettedByUser(false);
         setErrorMessage('Pin code validation failed');
         setHasPinCodeValidationFailed(true);
@@ -55,7 +61,9 @@ const PinCodeBackup: FC<Props> = props => {
 
   return (
     <>
-      {isPinCodeSettedByUser ? (
+      {isLoading ? (
+        <ActivityIndicator size="large" />
+      ) : isPinCodeSettedByUser ? (
         <>
           <PINCode
             callbackErrorTouchId={e => console.log(e)}

@@ -1,5 +1,5 @@
 import React, {useState, FC} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 
 import PinCodeBackupAuth from '../../components/pinCodeBackupAuth/PinCodeBackup';
 import BiometricAuth from '../../components/biometricAuth/BiometricAuth';
@@ -16,8 +16,10 @@ const Authentication: FC<Props> = props => {
     false,
   );
   const [isSignedIn, setIsSignedIn] = useState<boolean | null>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isBiometricSignInSupported = () => {
+    setIsLoading(true);
     TouchID.isSupported()
       .then(biometryType => {
         setIsBiometricSignIn(true);
@@ -35,6 +37,7 @@ const Authentication: FC<Props> = props => {
         setIsBiometricSignIn(false);
       });
     setIsSignedIn(true);
+    setIsLoading(false);
   };
 
   const onSuccesfullAuthentication = () => {
@@ -48,7 +51,9 @@ const Authentication: FC<Props> = props => {
   return (
     <View style={authStyles.authContainer}>
       <View>
-        {!isSignedIn ? (
+        {isLoading ? (
+          <ActivityIndicator size="large" />
+        ) : !isSignedIn ? (
           <View style={authStyles.authTitleContainer}>
             <Text style={authStyles.authTitleText}>QR Code Vault</Text>
             <View style={authStyles.signInButtonContainer}>
