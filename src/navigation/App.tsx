@@ -24,7 +24,7 @@ const App: FC = () => {
         <StatusBar />
         <ScrollView contentInsetAdjustmentBehavior="automatic">
           <ErrorBoundary>
-            <View style={{height: windowHeight, flex: 1}}>
+            <View style={{height: windowHeight}}>
               <Stack.Navigator>
                 <Stack.Screen
                   name="Auth"
