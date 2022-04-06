@@ -5,6 +5,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import storageServices from '../../services/encryptedStorage';
 import Snackbar from 'react-native-snackbar';
 import styles from '../../styles/QRCodeStyles';
+import {useMutation} from 'react-query';
 
 interface Props {
   goToOptions: () => void;
@@ -16,20 +17,18 @@ const QRCodeScan: FC<Props> = ({goToOptions}) => {
     boolean | null
   >(false);
   const [errorMessage, setErrorMessage] = useState<string | null>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const saveQRCode = async (qrCodeData: string | undefined) => {
-    setIsLoading(true);
-    if (qrCodeData) {
-      storageServices
-        .addQRCode(qrCodeData)
-        .then(() => goToOptions())
-        .catch(() => {
-          setHasQRCodeSavingFailed(true);
-          setErrorMessage("QR code didn't saved correctly");
-        });
-      setIsLoading(false);
-    }
-  };
+
+  const {mutate, isLoading, isError, isSuccess} = useMutation(
+    (data: string) => storageServices.addQRCode(data), // saves the QR code data on QR code read
+  );
+  if (isError) {
+    setHasQRCodeSavingFailed(true);
+    setErrorMessage("QR code wasn't saved correctly");
+  }
+
+  if (isSuccess) {
+    goToOptions();
+  }
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -39,7 +38,7 @@ const QRCodeScan: FC<Props> = ({goToOptions}) => {
           <QRCodeScanner
             cameraStyle={{height: windowHeight}}
             showMarker
-            onRead={data => saveQRCode(data.data)}
+            onRead={data => mutate(data.data)}
           />
           {hasQRCodeSavingFailed
             ? Snackbar.show({

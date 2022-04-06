@@ -1,6 +1,7 @@
-import React, {useEffect, useState, FC} from 'react';
+import React, {useState, FC} from 'react';
 import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 
+import {useQuery} from 'react-query';
 import TouchID from 'react-native-touch-id';
 import styles from '../../styles/AuthStyles';
 interface Props {
@@ -10,8 +11,6 @@ interface Props {
 
 const BiometricAuth: FC<Props> = props => {
   const [errorMessage, setErrorMessage] = useState<string | null>();
-  const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const optionalConfigObject = {
     title: 'Authentication Required',
@@ -24,31 +23,23 @@ const BiometricAuth: FC<Props> = props => {
     passcodeFallback: true,
     sensorErrorDescription: 'Too many attempts',
   };
+  const {isLoading, isError, error} = useQuery<Boolean, Error>('authData', () =>
+    TouchID.authenticate('Authenticate', optionalConfigObject).then(() =>
+      props.onSuccesfullAuthentication(),
+    ),
+  );
 
-  useEffect(() => {
-    TouchID.authenticate('Authenticate', optionalConfigObject)
-      .then(() => {
-        setIsLoading(false);
-        props.onSuccesfullAuthentication();
-      })
-      .catch((err: Error) => {
-        setIsLoading(false);
-        handleFailedAuthentication(err.message);
-      });
-  });
-
-  const handleFailedAuthentication = (error: string) => {
-    setHasError(true);
-    if (error !== 'User canceled authentication') {
+  if (isError) {
+    if (error.message !== 'User canceled authentication') {
       setErrorMessage('Something went worng');
     }
-  };
+  }
 
   return (
     <View style={[styles.authContainer, styles.horizontal]}>
       {isLoading ? (
         <ActivityIndicator size="large" />
-      ) : hasError ? (
+      ) : isError ? (
         <View>
           <Text style={styles.errorMessage}>{errorMessage}</Text>
           <TouchableOpacity onPress={() => props.handlePinCodeSignIn()}>

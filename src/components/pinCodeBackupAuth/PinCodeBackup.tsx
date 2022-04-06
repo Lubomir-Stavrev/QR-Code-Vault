@@ -1,10 +1,11 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {ActivityIndicator} from 'react-native';
+import styles from '../../styles/AuthStyles';
 
 import * as Keychain from 'react-native-keychain';
 import PINCode, {hasUserSetPinCode} from '@haskkor/react-native-pincode';
-import styles from '../../styles/AuthStyles';
 import Snackbar from 'react-native-snackbar';
+import {useQuery} from 'react-query';
 
 const pinCodeKeychainName = 'pincode';
 const defaultPasswordLength = 6;
@@ -24,25 +25,18 @@ const PinCodeBackup: FC<Props> = props => {
     boolean | null
   >(false);
   const [errorMessage, setErrorMessage] = useState<string | null>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    async function isPinCodeSetted() {
-      try {
-        const result = await hasUserSetPinCode(pinCodeKeychainName);
-        setIsLoading(false);
-        if (result) {
-          setIsPinCodeSettedByUser(result);
-        }
-      } catch (err) {
-        setIsLoading(false);
-        setIsPinCodeSettedByUser(false);
-        setErrorMessage('Pin code validation failed');
-        setHasPinCodeValidationFailed(true);
-      }
-    }
-    isPinCodeSetted();
-  }, []);
+  const {isLoading, isError} = useQuery('hasUserSetPinData', () =>
+    hasUserSetPinCode(pinCodeKeychainName).then(result =>
+      setIsPinCodeSettedByUser(result),
+    ),
+  );
+
+  if (isError) {
+    setIsPinCodeSettedByUser(false);
+    setErrorMessage('Pin code validation failed');
+    setHasPinCodeValidationFailed(true);
+  }
 
   const savePinInKeyChain = (pin: string | undefined) => {
     if (pin) {

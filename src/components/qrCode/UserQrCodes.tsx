@@ -1,4 +1,4 @@
-import React, {useEffect, useState, FC} from 'react';
+import React, {useState, FC} from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import storageServices from '../../services/encryptedStorage';
 import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
 import styles from '../../styles/QRCodeStyles';
+import {useMutation, useQuery, QueryClient} from 'react-query';
 
 interface Props {
   goToOptions: () => void;
@@ -21,51 +22,47 @@ interface QRData {
   qrCodeData?: string | undefined;
   id: string;
 }
+const queryClient = new QueryClient();
 
 const UserQrCodes: FC<Props> = ({goToOptions}) => {
   const [userQRCodes, setUserQRCodes] = useState<QRData[]>();
   const [collectionViewState, setCollectionViewState] = useState<
     boolean | undefined
   >(true);
+
   const [QRCodeValue, setQRCodeValue] = useState<string | undefined>();
-
-  const [hasGetAndSaveQRCodesFailed, setHasGetAndSaveQRCodesFailed] = useState<
-    boolean | null
-  >(false);
   const [errorMessage, setErrorMessage] = useState<string | null>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
 
-  useEffect(() => {
-    getAndSaveQRCodes()
-      .then(() => setIsLoading(false))
-      .catch(() => {
-        setHasGetAndSaveQRCodesFailed(true);
-        setErrorMessage("Couldn't get QR codes collection.");
-        setIsLoading(false);
-      });
-  }, []);
-
-  async function getAndSaveQRCodes() {
-    let userQRCodesCollection: QRData[] | undefined =
-      await storageServices.getQRCodes();
-
-    if (userQRCodesCollection) {
-      setUserQRCodes(userQRCodesCollection);
-    }
+  const {isLoading, isError, isRefetching} = useQuery('getQRCodesData', () =>
+    getQRCodes().then((userQRCodesCollection: QRData[] | undefined) =>
+      setUserQRCodes(userQRCodesCollection),
+    ),
+  );
+  if (isError) {
+    setHasError(true);
+    setErrorMessage("Couldn't get QR codes collection.");
   }
-
-  const deleteQRCode = (qrcode: string) => {
-    setIsLoading(true);
-    storageServices
-      .deleteQRCode(qrcode)
-      .then(() => {
-        setCollectionViewState(true);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    setIsLoading(false);
+  if (isRefetching) {
+    console.log('YES IT IS');
+  }
+  const getQRCodes = () => {
+    return storageServices.getQRCodes();
   };
+
+  const deleteQrCodeFromStorage = (qrCode: string) => {
+    return storageServices.deleteQRCode(qrCode);
+  };
+  const deleteQRCode = useMutation(deleteQrCodeFromStorage, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('getQRCodesData');
+      setCollectionViewState(true);
+    },
+    onError: () => {
+      setHasError(true);
+      setErrorMessage("Couldn't delete QR code from collection.");
+    },
+  });
 
   const showPressedQRCodeData = (qrData: string | undefined) => {
     setQRCodeValue(qrData);
@@ -79,7 +76,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
       ) : (
         <>
           <Text style={styles.bigText}>QR Codes Collection</Text>
-          {hasGetAndSaveQRCodesFailed
+          {hasError
             ? Snackbar.show({
                 text: errorMessage ?? 'Something went wrong',
                 duration: Snackbar.LENGTH_INDEFINITE,
@@ -109,7 +106,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
                         <View style={styles.qrCodeRow}>
                           <TouchableOpacity
                             style={styles.deleteButton}
-                            onPress={() => deleteQRCode(item?.id)}>
+                            onPress={() => deleteQRCode.mutate(item?.id)}>
                             <Text>Delete</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
