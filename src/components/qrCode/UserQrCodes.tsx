@@ -34,7 +34,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
   const [errorMessage, setErrorMessage] = useState<string | null>();
   const [hasError, setHasError] = useState<boolean>(false);
 
-  const {isLoading, isError, isRefetching} = useQuery('getQRCodesData', () =>
+  const {isLoading, isError} = useQuery('getQRCodesData', () =>
     getQRCodes().then((userQRCodesCollection: QRData[] | undefined) =>
       setUserQRCodes(userQRCodesCollection),
     ),
@@ -42,9 +42,6 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
   if (isError) {
     setHasError(true);
     setErrorMessage("Couldn't get QR codes collection.");
-  }
-  if (isRefetching) {
-    console.log('YES IT IS');
   }
   const getQRCodes = () => {
     return storageServices.getQRCodes();
