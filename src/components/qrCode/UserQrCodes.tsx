@@ -12,17 +12,16 @@ import storageServices from '../../services/encryptedStorage';
 import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
 import styles from '../../styles/QRCodeStyles';
-import {useMutation, useQuery, QueryClient} from 'react-query';
+import {useMutation, useQuery} from 'react-query';
 
 interface Props {
   goToOptions: () => void;
 }
 
 interface QRData {
-  qrCodeData?: string | undefined;
+  qrCodeData: string | undefined;
   id: string;
 }
-const queryClient = new QueryClient();
 
 const UserQrCodes: FC<Props> = ({goToOptions}) => {
   const [userQRCodes, setUserQRCodes] = useState<QRData[]>();
@@ -34,10 +33,11 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
   const [errorMessage, setErrorMessage] = useState<string | null>();
   const [hasError, setHasError] = useState<boolean>(false);
 
-  const {isLoading, isError} = useQuery('getQRCodesData', () =>
-    getQRCodes().then((userQRCodesCollection: QRData[] | undefined) =>
-      setUserQRCodes(userQRCodesCollection),
-    ),
+  const {isLoading, isError, refetch} = useQuery('getQRCodesData', () =>
+    getQRCodes().then((userQRCodesCollection: QRData[] | undefined) => {
+      console.log('FETCHED');
+      setUserQRCodes(userQRCodesCollection);
+    }),
   );
   if (isError) {
     setHasError(true);
@@ -52,7 +52,8 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
   };
   const deleteQRCode = useMutation(deleteQrCodeFromStorage, {
     onSuccess: () => {
-      queryClient.invalidateQueries('getQRCodesData');
+      console.log('DELETED');
+      refetch();
       setCollectionViewState(true);
     },
     onError: () => {

@@ -5,7 +5,7 @@ import styles from '../../styles/AuthStyles';
 import * as Keychain from 'react-native-keychain';
 import PINCode, {hasUserSetPinCode} from '@haskkor/react-native-pincode';
 import Snackbar from 'react-native-snackbar';
-import {useQuery} from 'react-query';
+import {useMutation, useQuery} from 'react-query';
 
 const pinCodeKeychainName = 'pincode';
 const defaultPasswordLength = 6;
@@ -24,6 +24,9 @@ const PinCodeBackup: FC<Props> = props => {
   const [hasPinCodeSignUpFailed, setHasPinCodeSignUpFailed] = useState<
     boolean | null
   >(false);
+  const [hasPinCodeSavingFailed, setHasPinCodeSavingFailed] = useState<
+    boolean | null
+  >(false);
   const [errorMessage, setErrorMessage] = useState<string | null>();
 
   const {isLoading, isError} = useQuery('hasUserSetPinData', () =>
@@ -38,15 +41,26 @@ const PinCodeBackup: FC<Props> = props => {
     setHasPinCodeValidationFailed(true);
   }
 
-  const savePinInKeyChain = (pin: string | undefined) => {
+  const saveToKeychain = (pin: string | undefined) => {
     if (pin) {
-      Keychain.setInternetCredentials(
+      return Keychain.setInternetCredentials(
         pinCodeKeychainName,
         pinCodeKeychainName,
         pin,
-      ).then(() => setIsPinCodeSettedByUser(true));
+      );
+    } else {
+      throw new Error();
     }
   };
+  const savePinInKeyChain = useMutation(saveToKeychain, {
+    onSuccess: () => {
+      setIsPinCodeSettedByUser(true);
+    },
+    onError: () => {
+      setHasPinCodeSavingFailed(true);
+      setErrorMessage('Pin code was not saved successfully');
+    },
+  });
 
   const handleFailedSignUp = () => {
     setHasPinCodeSignUpFailed(true);
@@ -87,9 +101,11 @@ const PinCodeBackup: FC<Props> = props => {
             status={'choose'}
             stylePinCodeTextSubtitle={styles.pinText}
             onFail={() => handleFailedSignUp()}
-            finishProcess={pin => savePinInKeyChain(pin)}
+            finishProcess={pin => savePinInKeyChain.mutate(pin)}
           />
-          {hasPinCodeValidationFailed || hasPinCodeSignUpFailed
+          {hasPinCodeValidationFailed ||
+          hasPinCodeSignUpFailed ||
+          hasPinCodeSavingFailed
             ? Snackbar.show({
                 text: errorMessage ?? 'Something went wrong',
                 duration: Snackbar.LENGTH_LONG,

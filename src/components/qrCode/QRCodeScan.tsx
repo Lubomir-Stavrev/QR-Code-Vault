@@ -13,36 +13,37 @@ interface Props {
 const windowHeight = Dimensions.get('window').height;
 
 const QRCodeScan: FC<Props> = ({goToOptions}) => {
-  const [hasQRCodeSavingFailed, setHasQRCodeSavingFailed] = useState<
-    boolean | null
-  >(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>();
+  const [hasQRCodeSavingFailed, setHasQRCodeSavingFailed] =
+    useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
 
-  const {mutate, isLoading, isError, isSuccess} = useMutation(
-    (data: string) => storageServices.addQRCode(data), // saves the QR code data on QR code read
-  );
-  if (isError) {
-    setHasQRCodeSavingFailed(true);
-    setErrorMessage("QR code wasn't saved correctly");
-  }
+  const saveQRCodeRequest = (data: string) => {
+    return storageServices.addQRCode(data);
+  };
 
-  if (isSuccess) {
-    goToOptions();
-  }
+  const saveQRCode = useMutation(saveQRCodeRequest, {
+    onSuccess: () => {
+      goToOptions();
+    },
+    onError: () => {
+      setHasQRCodeSavingFailed(true);
+      setErrorMessage("QR code wasn't saved correctly");
+    },
+  });
   return (
     <View style={styles.container}>
-      {isLoading ? (
+      {saveQRCode.isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
         <View>
           <QRCodeScanner
             cameraStyle={{height: windowHeight}}
             showMarker
-            onRead={data => mutate(data.data)}
+            onRead={data => saveQRCode.mutate(data.data)}
           />
           {hasQRCodeSavingFailed
             ? Snackbar.show({
-                text: errorMessage ?? 'Something went wrong',
+                text: errorMessage ? errorMessage : 'Something went wrong.',
                 duration: Snackbar.LENGTH_INDEFINITE,
                 action: {
                   text: 'go to menu',
