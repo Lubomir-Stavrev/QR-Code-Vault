@@ -8,18 +8,18 @@ import styles from '../../styles/QRCodeStyles';
 import {useMutation} from 'react-query';
 
 interface Props {
-  goToOptions: () => void;
+  navigation: {navigate: (text: string) => void};
 }
 const windowHeight = Dimensions.get('window').height;
 
-const QRCodeScan: FC<Props> = ({goToOptions}) => {
+const QRCodeScan: FC<Props> = ({navigation}) => {
   const saveQRCodeRequest = (data: string) => {
     return storageServices.addQRCode(data);
   };
 
   const saveQRCode = useMutation(saveQRCodeRequest, {
     onSuccess: () => {
-      goToOptions();
+      navigation.navigate('QRCodeMenu');
     },
   });
 
@@ -42,7 +42,7 @@ const QRCodeScan: FC<Props> = ({goToOptions}) => {
                   text: 'go to menu',
                   textColor: 'green',
                   onPress: () => {
-                    goToOptions();
+                    navigation.navigate('QRCodeMenu');
                   },
                 },
               })

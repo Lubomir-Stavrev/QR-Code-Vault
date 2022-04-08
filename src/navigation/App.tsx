@@ -12,8 +12,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {QueryClient, QueryClientProvider} from 'react-query';
 
 import AuthScreen from '../screens/auth/AuthenticationRoute';
-import QRCodeScreen from '../components/qrCode/QRCodeMenu';
 import ErrorBoundary from '../components/errorHandler/ErrorBoundary';
+
+import QRCodeMenu from '../components/qrCode/QRCodeMenu';
+import QRCodeScan from '../components/qrCode/QRCodeScan';
+import UserQrCodes from '../components/qrCode/UserQrCodes';
+
+import PinCodeBackupAuth from '../components/pinCodeBackupAuth/PinCodeBackup';
+import BiometricAuth from '../components/biometricAuth/BiometricAuth';
+
 const Stack = createNativeStackNavigator();
 const queryClient = new QueryClient();
 
@@ -35,8 +42,28 @@ const App: FC = () => {
                     options={{headerShown: false}}
                   />
                   <Stack.Screen
-                    name="QRCodeRoute"
-                    component={QRCodeScreen}
+                    name="QRCodeMenu"
+                    component={QRCodeMenu}
+                    options={{headerShown: false}}
+                  />
+                  <Stack.Screen
+                    name="QRCodeScan"
+                    component={QRCodeScan}
+                    options={{headerShown: false}}
+                  />
+                  <Stack.Screen
+                    name="UserQrCodes"
+                    component={UserQrCodes}
+                    options={{headerShown: false}}
+                  />
+                  <Stack.Screen
+                    name="PinCodeBackupAuth"
+                    component={PinCodeBackupAuth}
+                    options={{headerShown: false}}
+                  />
+                  <Stack.Screen
+                    name="BiometricAuth"
+                    component={BiometricAuth}
                     options={{headerShown: false}}
                   />
                 </Stack.Navigator>

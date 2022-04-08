@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {
   View,
   Text,
@@ -15,11 +15,10 @@ import styles from '../../styles/QRCodeStyles';
 import {useMutation, useQuery, useQueryClient} from 'react-query';
 
 interface Props {
-  goToOptions: () => void;
+  navigation: {navigate: (text: string) => void};
 }
-const UserQrCodes: FC<Props> = ({goToOptions}) => {
+const UserQrCodes: FC<Props> = ({navigation}) => {
   const queryClient = useQueryClient();
-  const [showAllQRCodes, setShowAllQRCodes] = useState(true);
 
   const getQRCodes = () => {
     return storageServices.getQRCodes();
@@ -37,11 +36,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
   const getOne = (qrDataId: string) => {
     return storageServices.getOneQRCode(qrDataId);
   };
-  const showPressedQRCode = useMutation(getOne, {
-    onSuccess: () => {
-      setShowAllQRCodes(false);
-    },
-  });
+  const showPressedQRCode = useMutation(getOne);
 
   return (
     <>
@@ -58,17 +53,17 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
                   text: 'go to menu',
                   textColor: 'green',
                   onPress: () => {
-                    goToOptions();
+                    navigation.navigate('QRCodeMenu');
                   },
                 },
               })
             : null}
           <SafeAreaView style={styles.scrollViewContainer}>
-            {showAllQRCodes ? (
+            {!showPressedQRCode.isSuccess ? (
               <>
                 <TouchableOpacity
                   style={styles.goBackButton}
-                  onPress={() => goToOptions()}>
+                  onPress={() => navigation.navigate('QRCodeMenu')}>
                   <View>
                     <Text>Go Back</Text>
                   </View>
@@ -105,7 +100,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
                 </View>
                 <TouchableOpacity
                   style={styles.goBackButton}
-                  onPress={() => setShowAllQRCodes(true)}>
+                  onPress={() => navigation.navigate('QRCodeMenu')}>
                   <View>
                     <Text style={styles.smallText}>Go Back</Text>
                   </View>

@@ -11,7 +11,7 @@ const pinCodeKeychainName = 'pincode';
 const defaultPasswordLength = 6;
 
 interface Props {
-  onSuccesfullAuthentication: () => void;
+  navigation: {navigate: (text: string) => void};
 }
 
 const PinCodeBackup: FC<Props> = props => {
@@ -39,7 +39,6 @@ const PinCodeBackup: FC<Props> = props => {
       ) : hasUserSetPinData.data ? (
         <>
           <PINCode
-            callbackErrorTouchId={e => console.log(e)}
             alphabetCharsVisible={false}
             iconButtonDeleteDisabled={true}
             stylePinCodeDeleteButtonText={styles.pinText}
@@ -49,7 +48,7 @@ const PinCodeBackup: FC<Props> = props => {
             stylePinCodeTextTitle={styles.pinText}
             styleLockScreenTitle={styles.pinText}
             status={'enter'}
-            finishProcess={() => props.onSuccesfullAuthentication()}
+            finishProcess={() => props.navigation.navigate('QRCodeMenu')}
           />
         </>
       ) : (

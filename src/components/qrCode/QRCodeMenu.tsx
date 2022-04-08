@@ -1,50 +1,34 @@
-import React, {useState, FC} from 'react';
+import React, {FC} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 
-import QRCodeScan from './QRCodeScan';
-import UserQrCodes from './UserQrCodes';
 import styles from '../../styles/QRCodeStyles';
 
-const QRCodeRoute: FC = () => {
-  const [optionsViewState, setOptionViewState] = useState<boolean | null>(true);
-  const [isScanQRCode, setIsScanQRCode] = useState<boolean | null>(false);
-
-  const handleQRCodeOptionPressed = (isScanQRCodeState: boolean) => {
-    setIsScanQRCode(isScanQRCodeState);
-    setOptionViewState(false);
-  };
-
-  const goToOptions = () => {
-    setOptionViewState(true);
-  };
-
+interface Props {
+  navigation: {navigate: (text: string) => void};
+}
+const QRCodeRoute: FC<Props> = props => {
   return (
     <View style={styles.qrContainer}>
       <View>
-        {optionsViewState ? (
-          <View style={styles.qrMenuContainer}>
-            <Text style={styles.qrMenuTitle}>QR Code Vault</Text>
-            <View>
-              <TouchableOpacity onPress={() => handleQRCodeOptionPressed(true)}>
-                <View style={styles.menuButtonContainer}>
-                  <Text style={styles.menuButtonText}>Scan QR CODE</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => handleQRCodeOptionPressed(false)}>
-                <View style={styles.menuButtonContainer}>
-                  <Text style={styles.menuButtonText}>
-                    View QR code collection
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+        <View style={styles.qrMenuContainer}>
+          <Text style={styles.qrMenuTitle}>QR Code Vault</Text>
+          <View>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('QRCodeScan')}>
+              <View style={styles.menuButtonContainer}>
+                <Text style={styles.menuButtonText}>Scan QR CODE</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('UserQrCodes')}>
+              <View style={styles.menuButtonContainer}>
+                <Text style={styles.menuButtonText}>
+                  View QR code collection
+                </Text>
+              </View>
+            </TouchableOpacity>
           </View>
-        ) : isScanQRCode ? (
-          <QRCodeScan goToOptions={goToOptions} />
-        ) : (
-          <UserQrCodes goToOptions={goToOptions} />
-        )}
+        </View>
       </View>
     </View>
   );

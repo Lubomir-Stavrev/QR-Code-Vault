@@ -5,8 +5,7 @@ import {useQuery} from 'react-query';
 import TouchID from 'react-native-touch-id';
 import styles from '../../styles/AuthStyles';
 interface Props {
-  handlePinCodeSignIn: () => void;
-  onSuccesfullAuthentication: () => void;
+  navigation: {navigate: (text: string) => void};
 }
 
 const BiometricAuth: FC<Props> = props => {
@@ -21,10 +20,14 @@ const BiometricAuth: FC<Props> = props => {
     passcodeFallback: true,
     sensorErrorDescription: 'Too many attempts',
   };
-  const {isLoading, isError} = useQuery<Boolean, Error>('authData', () =>
-    TouchID.authenticate('Authenticate', optionalConfigObject).then(() =>
-      props.onSuccesfullAuthentication(),
-    ),
+  const {isLoading, isError} = useQuery<Boolean, Error>(
+    'authData',
+    () => TouchID.authenticate('Authenticate', optionalConfigObject),
+    {
+      onSuccess: () => {
+        props.navigation.navigate('QRCodeMenu');
+      },
+    },
   );
 
   return (
@@ -34,7 +37,8 @@ const BiometricAuth: FC<Props> = props => {
       ) : isError ? (
         <View>
           <Text style={styles.errorMessage}>User canceled authentication</Text>
-          <TouchableOpacity onPress={() => props.handlePinCodeSignIn()}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('PinCodeBackupAuth')}>
             <View style={styles.button}>
               <Text style={styles.signInButton}>Sign In with pin code</Text>
             </View>
