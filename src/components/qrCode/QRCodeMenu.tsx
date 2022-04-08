@@ -7,10 +7,10 @@ import styles from '../../styles/QRCodeStyles';
 
 const QRCodeRoute: FC = () => {
   const [optionsViewState, setOptionViewState] = useState<boolean | null>(true);
-  const [isAddQRCode, setIsAddQRCode] = useState<boolean | null>(false);
+  const [isScanQRCode, setIsScanQRCode] = useState<boolean | null>(false);
 
-  const handleQRCodeOptionPressed = (isAddQRCodeState: boolean) => {
-    setIsAddQRCode(isAddQRCodeState);
+  const handleQRCodeOptionPressed = (isScanQRCodeState: boolean) => {
+    setIsScanQRCode(isScanQRCodeState);
     setOptionViewState(false);
   };
 
@@ -40,7 +40,7 @@ const QRCodeRoute: FC = () => {
               </TouchableOpacity>
             </View>
           </View>
-        ) : isAddQRCode ? (
+        ) : isScanQRCode ? (
           <QRCodeScan goToOptions={goToOptions} />
         ) : (
           <UserQrCodes goToOptions={goToOptions} />

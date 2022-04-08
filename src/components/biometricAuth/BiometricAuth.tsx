@@ -1,4 +1,4 @@
-import React, {useState, FC} from 'react';
+import React, {FC} from 'react';
 import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 
 import {useQuery} from 'react-query';
@@ -10,8 +10,6 @@ interface Props {
 }
 
 const BiometricAuth: FC<Props> = props => {
-  const [errorMessage, setErrorMessage] = useState<string | null>();
-
   const optionalConfigObject = {
     title: 'Authentication Required',
     imageColor: '#FFCC1D',
@@ -23,17 +21,11 @@ const BiometricAuth: FC<Props> = props => {
     passcodeFallback: true,
     sensorErrorDescription: 'Too many attempts',
   };
-  const {isLoading, isError, error} = useQuery<Boolean, Error>('authData', () =>
+  const {isLoading, isError} = useQuery<Boolean, Error>('authData', () =>
     TouchID.authenticate('Authenticate', optionalConfigObject).then(() =>
       props.onSuccesfullAuthentication(),
     ),
   );
-
-  if (isError) {
-    if (error.message !== 'User canceled authentication') {
-      setErrorMessage('Something went worng');
-    }
-  }
 
   return (
     <View style={[styles.authContainer, styles.horizontal]}>
@@ -41,7 +33,7 @@ const BiometricAuth: FC<Props> = props => {
         <ActivityIndicator size="large" />
       ) : isError ? (
         <View>
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
+          <Text style={styles.errorMessage}>User canceled authentication</Text>
           <TouchableOpacity onPress={() => props.handlePinCodeSignIn()}>
             <View style={styles.button}>
               <Text style={styles.signInButton}>Sign In with pin code</Text>

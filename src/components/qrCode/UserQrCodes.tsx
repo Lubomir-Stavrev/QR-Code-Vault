@@ -1,4 +1,4 @@
-import React, {useState, FC} from 'react';
+import React, {FC, useState} from 'react';
 import {
   View,
   Text,
@@ -12,71 +12,47 @@ import storageServices from '../../services/encryptedStorage';
 import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
 import styles from '../../styles/QRCodeStyles';
-import {useMutation, useQuery} from 'react-query';
+import {useMutation, useQuery, useQueryClient} from 'react-query';
 
 interface Props {
   goToOptions: () => void;
 }
-
-interface QRData {
-  qrCodeData: string | undefined;
-  id: string;
-}
-
 const UserQrCodes: FC<Props> = ({goToOptions}) => {
-  const [userQRCodes, setUserQRCodes] = useState<QRData[]>();
-  const [collectionViewState, setCollectionViewState] = useState<
-    boolean | undefined
-  >(true);
+  const queryClient = useQueryClient();
+  const [showAllQRCodes, setShowAllQRCodes] = useState(true);
 
-  const [QRCodeValue, setQRCodeValue] = useState<string | undefined>();
-  const [errorMessage, setErrorMessage] = useState<string | null>();
-  const [hasError, setHasError] = useState<boolean>(false);
-
-  const {isLoading, isError, refetch} = useQuery('getQRCodesData', () =>
-    getQRCodes().then((userQRCodesCollection: QRData[] | undefined) => {
-      console.log('FETCHED');
-      setUserQRCodes(userQRCodesCollection);
-    }),
-  );
-  if (isError) {
-    setHasError(true);
-    setErrorMessage("Couldn't get QR codes collection.");
-  }
   const getQRCodes = () => {
     return storageServices.getQRCodes();
   };
+  const getQRCodesData = useQuery('getQRCodesData', () => getQRCodes());
 
   const deleteQrCodeFromStorage = (qrCode: string) => {
     return storageServices.deleteQRCode(qrCode);
   };
   const deleteQRCode = useMutation(deleteQrCodeFromStorage, {
     onSuccess: () => {
-      console.log('DELETED');
-      refetch();
-      setCollectionViewState(true);
+      queryClient.invalidateQueries('getQRCodesData');
     },
-    onError: () => {
-      setHasError(true);
-      setErrorMessage("Couldn't delete QR code from collection.");
+  });
+  const getOne = (qrDataId: string) => {
+    return storageServices.getOneQRCode(qrDataId);
+  };
+  const showPressedQRCode = useMutation(getOne, {
+    onSuccess: () => {
+      setShowAllQRCodes(false);
     },
   });
 
-  const showPressedQRCodeData = (qrData: string | undefined) => {
-    setQRCodeValue(qrData);
-    setCollectionViewState(false);
-  };
-
   return (
     <>
-      {isLoading ? (
+      {getQRCodesData.isLoading ? (
         <ActivityIndicator size="large" />
       ) : (
         <>
           <Text style={styles.bigText}>QR Codes Collection</Text>
-          {hasError
+          {getQRCodesData.isError
             ? Snackbar.show({
-                text: errorMessage ?? 'Something went wrong',
+                text: "Couldn't get QR codes collection.",
                 duration: Snackbar.LENGTH_INDEFINITE,
                 action: {
                   text: 'go to menu',
@@ -88,7 +64,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
               })
             : null}
           <SafeAreaView style={styles.scrollViewContainer}>
-            {collectionViewState ? (
+            {showAllQRCodes ? (
               <>
                 <TouchableOpacity
                   style={styles.goBackButton}
@@ -97,8 +73,8 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
                     <Text>Go Back</Text>
                   </View>
                 </TouchableOpacity>
-                {userQRCodes && userQRCodes.length > 0 ? (
-                  userQRCodes.map(item => {
+                {getQRCodesData.data && getQRCodesData.data.length > 0 ? (
+                  getQRCodesData.data.map(item => {
                     return (
                       <ScrollView key={item.id}>
                         <View style={styles.qrCodeRow}>
@@ -108,9 +84,7 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
                             <Text>Delete</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
-                            onPress={() =>
-                              showPressedQRCodeData(item?.qrCodeData)
-                            }>
+                            onPress={() => showPressedQRCode.mutate(item?.id)}>
                             <QRCode value={item?.qrCodeData} />
                           </TouchableOpacity>
                         </View>
@@ -123,13 +97,15 @@ const UserQrCodes: FC<Props> = ({goToOptions}) => {
               </>
             ) : (
               <View>
-                <QRCode value={QRCodeValue} size={300} />
+                <QRCode value={showPressedQRCode.data?.qrCodeData} size={300} />
                 <View style={styles.qrCodeValueContainer}>
-                  <Text style={styles.smallText}>{QRCodeValue}</Text>
+                  <Text style={styles.smallText}>
+                    {showPressedQRCode.data?.qrCodeData}
+                  </Text>
                 </View>
                 <TouchableOpacity
                   style={styles.goBackButton}
-                  onPress={() => setCollectionViewState(true)}>
+                  onPress={() => setShowAllQRCodes(true)}>
                   <View>
                     <Text style={styles.smallText}>Go Back</Text>
                   </View>

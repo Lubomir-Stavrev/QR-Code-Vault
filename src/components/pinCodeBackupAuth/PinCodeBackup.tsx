@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {ActivityIndicator} from 'react-native';
 import styles from '../../styles/AuthStyles';
 
@@ -15,31 +15,9 @@ interface Props {
 }
 
 const PinCodeBackup: FC<Props> = props => {
-  const [isPinCodeSettedByUser, setIsPinCodeSettedByUser] = useState<
-    boolean | null
-  >(false);
-  const [hasPinCodeValidationFailed, setHasPinCodeValidationFailed] = useState<
-    boolean | null
-  >(false);
-  const [hasPinCodeSignUpFailed, setHasPinCodeSignUpFailed] = useState<
-    boolean | null
-  >(false);
-  const [hasPinCodeSavingFailed, setHasPinCodeSavingFailed] = useState<
-    boolean | null
-  >(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>();
-
-  const {isLoading, isError} = useQuery('hasUserSetPinData', () =>
-    hasUserSetPinCode(pinCodeKeychainName).then(result =>
-      setIsPinCodeSettedByUser(result),
-    ),
+  const hasUserSetPinData = useQuery('hasUserSetPinData', () =>
+    hasUserSetPinCode(pinCodeKeychainName),
   );
-
-  if (isError) {
-    setIsPinCodeSettedByUser(false);
-    setErrorMessage('Pin code validation failed');
-    setHasPinCodeValidationFailed(true);
-  }
 
   const saveToKeychain = (pin: string | undefined) => {
     if (pin) {
@@ -52,26 +30,13 @@ const PinCodeBackup: FC<Props> = props => {
       throw new Error();
     }
   };
-  const savePinInKeyChain = useMutation(saveToKeychain, {
-    onSuccess: () => {
-      setIsPinCodeSettedByUser(true);
-    },
-    onError: () => {
-      setHasPinCodeSavingFailed(true);
-      setErrorMessage('Pin code was not saved successfully');
-    },
-  });
-
-  const handleFailedSignUp = () => {
-    setHasPinCodeSignUpFailed(true);
-    setErrorMessage('Pin code SignUp failed.');
-  };
+  const savePinInKeyChain = useMutation(saveToKeychain);
 
   return (
     <>
-      {isLoading ? (
+      {hasUserSetPinData.isLoading ? (
         <ActivityIndicator size="large" />
-      ) : isPinCodeSettedByUser ? (
+      ) : hasUserSetPinData.data ? (
         <>
           <PINCode
             callbackErrorTouchId={e => console.log(e)}
@@ -100,14 +65,13 @@ const PinCodeBackup: FC<Props> = props => {
             styleLockScreenTitle={styles.pinText}
             status={'choose'}
             stylePinCodeTextSubtitle={styles.pinText}
-            onFail={() => handleFailedSignUp()}
             finishProcess={pin => savePinInKeyChain.mutate(pin)}
           />
-          {hasPinCodeValidationFailed ||
-          hasPinCodeSignUpFailed ||
-          hasPinCodeSavingFailed
+          {hasUserSetPinData.isError || savePinInKeyChain.isError
             ? Snackbar.show({
-                text: errorMessage ?? 'Something went wrong',
+                text: hasUserSetPinData.isError
+                  ? 'Pin code validation failed'
+                  : 'Pin code SignUp failed',
                 duration: Snackbar.LENGTH_LONG,
               })
             : null}

@@ -43,7 +43,17 @@ export default {
 
     return parsedQRCodeData;
   },
+  async getOneQRCode(qrCodeId: string) {
+    const prevQRCodeData = await EncryptedStorage.getItem(qrStorageName);
+    if (!prevQRCodeData) {
+      return;
+    }
+    const parsedQRCodeData: QRData[] = JSON.parse(prevQRCodeData);
 
+    const qrCode = parsedQRCodeData.find(el => el.id === qrCodeId);
+
+    return qrCode;
+  },
   async deleteQRCode(qrCodeId: string) {
     const prevQRCodeData = await EncryptedStorage.getItem(qrStorageName);
     if (!prevQRCodeData) {

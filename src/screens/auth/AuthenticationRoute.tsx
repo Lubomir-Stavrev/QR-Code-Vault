@@ -6,65 +6,47 @@ import BiometricAuth from '../../components/biometricAuth/BiometricAuth';
 import authStyles from '../../styles/AuthStyles';
 
 import TouchID from 'react-native-touch-id';
+import {useMutation} from 'react-query';
 
 interface Props {
   navigation: {navigate: (text: string) => void};
 }
 
 const Authentication: FC<Props> = props => {
-  const [isBiometricSignIn, setIsBiometricSignIn] = useState<boolean | null>(
-    false,
-  );
-  const [isSignedIn, setIsSignedIn] = useState<boolean | null>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isGoingToBiometricSignIn, setIsGoingToBiometricSignIn] =
+    useState(false);
 
-  const isBiometricSignInSupported = () => {
-    setIsLoading(true);
-    TouchID.isSupported()
-      .then(biometryType => {
-        setIsBiometricSignIn(true);
-
-        if (biometryType === 'FaceID') {
-          console.log('FaceID is supported.');
-        } else {
-          console.log('TouchID is supported.');
-        }
-      })
-      .catch(() => {
-        // User's phone doesn't support biometric authentication
-        // Or user canceled the biometric authentication
-        // So here we set that the user didn't signed-in successfully
-        setIsBiometricSignIn(false);
-      });
-    setIsSignedIn(true);
-    setIsLoading(false);
+  const checkIsSupported = () => {
+    return TouchID.isSupported().then(() => setIsGoingToBiometricSignIn(true));
   };
+  const isBiometricSignInSupported = useMutation(checkIsSupported);
 
   const onSuccesfullAuthentication = () => {
     props.navigation.navigate('QRCodeRoute');
   };
 
   const handlePinCodeSignIn = () => {
-    setIsBiometricSignIn(false);
+    setIsGoingToBiometricSignIn(false);
   };
 
   return (
     <View style={authStyles.authContainer}>
       <View>
-        {isLoading ? (
-          <ActivityIndicator size="large" />
-        ) : !isSignedIn ? (
+        {!isGoingToBiometricSignIn ? (
           <View style={authStyles.authTitleContainer}>
             <Text style={authStyles.authTitleText}>QR Code Vault</Text>
             <View style={authStyles.signInButtonContainer}>
-              <TouchableOpacity onPress={() => isBiometricSignInSupported()}>
+              <TouchableOpacity
+                onPress={() => isBiometricSignInSupported.mutate()}>
                 <View style={authStyles.button}>
                   <Text style={authStyles.buttonText}>Sign in</Text>
                 </View>
               </TouchableOpacity>
             </View>
           </View>
-        ) : isBiometricSignIn ? (
+        ) : isBiometricSignInSupported.isLoading ? (
+          <ActivityIndicator size="large" />
+        ) : isBiometricSignInSupported.isSuccess ? (
           <BiometricAuth
             handlePinCodeSignIn={handlePinCodeSignIn}
             onSuccesfullAuthentication={onSuccesfullAuthentication}
