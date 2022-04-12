@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`are QR Code componets rendering successfully renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#202020",
+      "flex": 1,
+      "height": "100%",
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "height": 1334,
+          "width": 750,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontFamily": "Roboto",
+            "fontSize": 35,
+            "letterSpacing": 1,
+          }
+        }
+      >
+        QR Code Vault
+      </Text>
+      <View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#01a3ea",
+                "borderRadius": 5,
+                "justifyContent": "center",
+                "margin": 10,
+                "padding": 10,
+                "paddingBottom": 15,
+                "paddingTop": 15,
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#ffff",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "700",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              Scan QR CODE
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#01a3ea",
+                "borderRadius": 5,
+                "justifyContent": "center",
+                "margin": 10,
+                "padding": 10,
+                "paddingBottom": 15,
+                "paddingTop": 15,
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#ffff",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "700",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              View QR code collection
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`are QR Code componets rendering successfully renders correctly 2`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "fontSize": 32,
+      }
+    }
+  >
+    QR Codes Collection
+  </Text>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": null,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#ffff",
+          "borderRadius": 10,
+          "left": 0,
+          "opacity": 1,
+          "padding": 10,
+          "position": "absolute",
+        }
+      }
+    >
+      <View>
+        <Text>
+          Go Back
+        </Text>
+      </View>
+    </View>
+    <Text>
+      Collection is empty
+    </Text>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`does Biometric Authentication renders successfully renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#202020",
+        "flex": 1,
+        "height": "100%",
+        "top": "5%",
+      },
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "padding": 10,
+      },
+    ]
+  }
+/>
+`;

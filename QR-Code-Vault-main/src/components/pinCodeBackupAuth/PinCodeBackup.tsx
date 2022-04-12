@@ -2,12 +2,12 @@ import React, {FC} from 'react';
 import {ActivityIndicator} from 'react-native';
 import styles from '../../styles/AuthStyles';
 
-import * as Keychain from 'react-native-keychain';
-import PINCode, {hasUserSetPinCode} from '@haskkor/react-native-pincode';
+import PINCode from '@haskkor/react-native-pincode';
 import Snackbar from 'react-native-snackbar';
-import {useMutation, useQuery} from 'react-query';
 
-const pinCodeKeychainName = 'pincode';
+import {useHasUserSetPinData} from './useHasUserSetPinData';
+import {useSavePinInKeyChain} from './useSavePinInKeyChain';
+
 const defaultPasswordLength = 6;
 
 interface Props {
@@ -15,22 +15,8 @@ interface Props {
 }
 
 const PinCodeBackup: FC<Props> = props => {
-  const hasUserSetPinData = useQuery('hasUserSetPinData', () =>
-    hasUserSetPinCode(pinCodeKeychainName),
-  );
-
-  const saveToKeychain = (pin: string | undefined) => {
-    if (pin) {
-      return Keychain.setInternetCredentials(
-        pinCodeKeychainName,
-        pinCodeKeychainName,
-        pin,
-      );
-    } else {
-      throw new Error();
-    }
-  };
-  const savePinInKeyChain = useMutation(saveToKeychain);
+  const hasUserSetPinData = useHasUserSetPinData();
+  const savePinInKeyChain = useSavePinInKeyChain();
 
   return (
     <>

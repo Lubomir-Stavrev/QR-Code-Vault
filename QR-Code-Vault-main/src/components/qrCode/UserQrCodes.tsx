@@ -8,35 +8,20 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import storageServices from '../../services/encryptedStorage';
 import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
 import styles from '../../styles/QRCodeStyles';
-import {useMutation, useQuery, useQueryClient} from 'react-query';
+import {useGetQRCodesData} from './queryServices/useGetQRCodesData';
+import {useGetOne} from './queryServices/useGetOne';
+import {useDeleteQRCode} from './queryServices/useDeleteQRCode';
 
 interface Props {
   navigation: {navigate: (text: string) => void};
 }
 const UserQrCodes: FC<Props> = ({navigation}) => {
-  const queryClient = useQueryClient();
-
-  const getQRCodes = () => {
-    return storageServices.getQRCodes();
-  };
-  const getQRCodesData = useQuery('getQRCodesData', () => getQRCodes());
-
-  const deleteQrCodeFromStorage = (qrCode: string) => {
-    return storageServices.deleteQRCode(qrCode);
-  };
-  const deleteQRCode = useMutation(deleteQrCodeFromStorage, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('getQRCodesData');
-    },
-  });
-  const getOne = (qrDataId: string) => {
-    return storageServices.getOneQRCode(qrDataId);
-  };
-  const showPressedQRCode = useMutation(getOne);
+  const getQRCodesData = useGetQRCodesData();
+  const deleteQRCode = useDeleteQRCode();
+  const showPressedQRCode = useGetOne();
 
   return (
     <>

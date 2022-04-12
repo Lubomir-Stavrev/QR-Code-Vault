@@ -30,10 +30,10 @@ const App: FC = () => {
   return (
     <NavigationContainer>
       <SafeAreaView>
-        <QueryClientProvider client={queryClient}>
-          <StatusBar />
-          <ScrollView contentInsetAdjustmentBehavior="automatic">
-            <ErrorBoundary>
+        <StatusBar />
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <ErrorBoundary>
+            <QueryClientProvider client={queryClient}>
               <View style={{height: windowHeight}}>
                 <Stack.Navigator>
                   <Stack.Screen
@@ -68,9 +68,9 @@ const App: FC = () => {
                   />
                 </Stack.Navigator>
               </View>
-            </ErrorBoundary>
-          </ScrollView>
-        </QueryClientProvider>
+            </QueryClientProvider>
+          </ErrorBoundary>
+        </ScrollView>
       </SafeAreaView>
     </NavigationContainer>
   );

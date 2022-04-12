@@ -1,27 +1,15 @@
 import React, {FC} from 'react';
 import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
-
 import authStyles from '../../styles/AuthStyles';
 
-import TouchID from 'react-native-touch-id';
-import {useMutation} from 'react-query';
+import {useIsBiometricSignInSupported} from './useIsBiometricSignInSupported';
 
 interface Props {
   navigation: {navigate: (text: string) => void};
 }
 
 const Authentication: FC<Props> = ({navigation}) => {
-  const checkIsSupported = () => {
-    return TouchID.isSupported();
-  };
-  const isBiometricSignInSupported = useMutation(checkIsSupported, {
-    onSuccess: () => {
-      navigation.navigate('BiometricAuth');
-    },
-    onError: () => {
-      navigation.navigate('PinCodeBackupAuth');
-    },
-  });
+  const isBiometricSignInSupported = useIsBiometricSignInSupported(navigation);
 
   return (
     <View style={authStyles.authContainer}>
