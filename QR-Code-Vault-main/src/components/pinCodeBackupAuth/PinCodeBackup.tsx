@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, View, Text} from 'react-native';
 import styles from '../../styles/AuthStyles';
 
 import PINCode from '@haskkor/react-native-pincode';
@@ -21,22 +21,20 @@ const PinCodeBackup: FC<Props> = props => {
   return (
     <>
       {hasUserSetPinData.isLoading ? (
-        <ActivityIndicator size="large" />
-      ) : hasUserSetPinData.data ? (
-        <>
-          <PINCode
-            alphabetCharsVisible={false}
-            iconButtonDeleteDisabled={true}
-            stylePinCodeDeleteButtonText={styles.pinText}
-            stylePinCodeTextButtonCircle={styles.pinText}
-            colorCircleButtons={'rgba(75,75,75,1)'}
-            passwordLength={defaultPasswordLength}
-            stylePinCodeTextTitle={styles.pinText}
-            styleLockScreenTitle={styles.pinText}
-            status={'enter'}
-            finishProcess={() => props.navigation.navigate('QRCodeMenu')}
-          />
-        </>
+        <ActivityIndicator testID="ActivityIndicator" size="large" />
+      ) : hasUserSetPinData.isSuccess ? (
+        <PINCode
+          alphabetCharsVisible={false}
+          iconButtonDeleteDisabled={true}
+          stylePinCodeDeleteButtonText={styles.pinText}
+          stylePinCodeTextButtonCircle={styles.pinText}
+          colorCircleButtons={'rgba(75,75,75,1)'}
+          passwordLength={defaultPasswordLength}
+          stylePinCodeTextTitle={styles.pinText}
+          styleLockScreenTitle={styles.pinText}
+          status={'enter'}
+          finishProcess={() => props.navigation.navigate('QRCodeMenu')}
+        />
       ) : (
         <>
           <PINCode

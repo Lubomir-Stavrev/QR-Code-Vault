@@ -2,10 +2,9 @@ import React, {FC} from 'react';
 import {View, Dimensions, ActivityIndicator} from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import storageServices from '../../services/encryptedStorage';
 import Snackbar from 'react-native-snackbar';
 import styles from '../../styles/QRCodeStyles';
-import {useMutation} from 'react-query';
+import {useSaveQRCode} from './queryServices/useSaveQRCode';
 
 interface Props {
   navigation: {navigate: (text: string) => void};
@@ -13,20 +12,12 @@ interface Props {
 const windowHeight = Dimensions.get('window').height;
 
 const QRCodeScan: FC<Props> = ({navigation}) => {
-  const saveQRCodeRequest = (data: string) => {
-    return storageServices.addQRCode(data);
-  };
-
-  const saveQRCode = useMutation(saveQRCodeRequest, {
-    onSuccess: () => {
-      navigation.navigate('QRCodeMenu');
-    },
-  });
+  const saveQRCode = useSaveQRCode(navigation);
 
   return (
     <View style={styles.container}>
       {saveQRCode.isLoading ? (
-        <ActivityIndicator size="large" />
+        <ActivityIndicator testID="ActivityIndicator" size="large" />
       ) : (
         <View>
           <QRCodeScanner

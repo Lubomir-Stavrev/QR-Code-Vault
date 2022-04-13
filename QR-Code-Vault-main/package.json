@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@haskkor/react-native-pincode": "^1.22.6",
-        "@react-native-async-storage/async-storage": "^1.17.0",
+        "@react-native-async-storage/async-storage": "^1.17.3",
         "@react-navigation/native": "^6.0.8",
         "@react-navigation/native-stack": "^6.5.2",
         "react": "17.0.2",
@@ -49,7 +49,8 @@
     "jest": {
         "preset": "react-native",
         "transformIgnorePatterns": [
-            "node_modules/(?!(react-native|react-native-touch-id|react-native-qrcode-scanner|react-native-snackbar|react-native-qrcode-svg)/)"
+            "/node_modules/(?!deck.gl|react-native|react-native-touch-id|react-native-qrcode-scanner|react-native-qrcode-svg)/)"
         ]
+
     }
 }
