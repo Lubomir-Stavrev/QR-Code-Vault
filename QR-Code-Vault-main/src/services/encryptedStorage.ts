@@ -27,7 +27,6 @@ export default {
             id: uuid.v4().toString(),
           },
         ];
-
     return await EncryptedStorage.setItem(
       qrStorageName,
       JSON.stringify(newQRCodeData),
