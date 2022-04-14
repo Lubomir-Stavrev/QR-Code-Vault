@@ -20,7 +20,7 @@ describe('testing services', () => {
   const qrStorageName = 'qrCodeStorage';
 
   it('should delete the passed data', async () => {
-    const hardCodedData = [
+    const expectedDataAfterDelete = [
       {
         qrCodeData: 'b',
         id: '2',
@@ -32,27 +32,30 @@ describe('testing services', () => {
     ];
     const spy = jest.spyOn(EncryptedStorage, 'setItem');
     await services.deleteQRCode('1');
-    expect(spy).toBeCalledWith(qrStorageName, JSON.stringify(hardCodedData));
+    expect(spy).toBeCalledWith(
+      qrStorageName,
+      JSON.stringify(expectedDataAfterDelete),
+    );
   });
 
   it('should return the right code by passed id', () => {
-    const hardCodedData = {
+    const expectedDataToBeReturned = {
       qrCodeData: 'b',
       id: '2',
     };
 
     services.getOneQRCode('2').then(res => {
-      expect(res).toEqual(hardCodedData);
+      expect(res).toEqual(expectedDataToBeReturned);
     });
   });
   it('should add the passed qrCodeData string correctly', async () => {
-    const hardCodedQRCodeData = 'test';
+    const expectedDataToBeAdded = 'test';
     const spy = jest.spyOn(EncryptedStorage, 'setItem');
-    await services.addQRCode(hardCodedQRCodeData);
+    await services.addQRCode(expectedDataToBeAdded);
 
     expect(spy).lastCalledWith(
       qrStorageName,
-      expect.stringContaining(hardCodedQRCodeData),
+      expect.stringContaining(expectedDataToBeAdded),
     );
   });
 });
