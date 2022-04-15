@@ -9,14 +9,17 @@ export const useIsBiometricSignInSupported = (navigation: Props) => {
   const checkIsSupported = () => {
     return TouchID.isSupported();
   };
-  const {mutateAsync, isLoading, isError} = useMutation(checkIsSupported, {
-    onSuccess: () => {
-      navigation.navigate('BiometricAuth');
+  const {mutateAsync, isLoading, isError, isSuccess} = useMutation(
+    checkIsSupported,
+    {
+      onSuccess: () => {
+        navigation.navigate('BiometricAuth');
+      },
+      onError: () => {
+        navigation.navigate('PinCodeBackupAuth');
+      },
     },
-    onError: () => {
-      navigation.navigate('PinCodeBackupAuth');
-    },
-  });
+  );
 
-  return {mutateAsync, isLoading, isError};
+  return {mutateAsync, isLoading, isError, isSuccess};
 };

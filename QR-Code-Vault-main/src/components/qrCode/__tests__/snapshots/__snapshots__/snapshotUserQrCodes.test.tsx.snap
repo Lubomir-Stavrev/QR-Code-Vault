@@ -1,0 +1,857 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserQRCodes renders correctly the error view 1`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "fontSize": 32,
+      }
+    }
+  >
+    QR Codes Collection
+  </Text>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": null,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="navigateToQRCodeMenu"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#ffff",
+          "borderRadius": 10,
+          "left": 0,
+          "opacity": 1,
+          "padding": 10,
+          "position": "absolute",
+        }
+      }
+    >
+      <View>
+        <Text>
+          Go Back
+        </Text>
+      </View>
+    </View>
+    <Text>
+      Collection is empty
+    </Text>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`UserQRCodes renders correctly the success view 1`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "fontSize": 32,
+      }
+    }
+  >
+    QR Codes Collection
+  </Text>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": null,
+      }
+    }
+  >
+    <View>
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={300}
+        bbWidth={300}
+        focusable={false}
+        height={300}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            Object {
+              "flex": 0,
+              "height": 300,
+              "width": 300,
+            },
+          ]
+        }
+        vbHeight={300}
+        vbWidth={300}
+        width={300}
+      >
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -65536,
+                  1,
+                  -16711681,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={0}
+              name="grad"
+              x1="0%"
+              x2="100%"
+              y1="0%"
+              y2="100%"
+            />
+          </RNSVGDefs>
+          <RNSVGGroup>
+            <RNSVGRect
+              fill={4294967295}
+              height={300}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+              width={300}
+              x={-0}
+              y={-0}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M0 6 L84 6 M144 6 L180 6 M192 6 L204 6 M216 6 L300 6 M0 18 L12 18 M72 18 L84 18 M96 18 L156 18 M168 18 L204 18 M216 18 L228 18 M288 18 L300 18 M0 30 L12 30 M24 30 L60 30 M72 30 L84 30 M108 30 L120 30 M144 30 L180 30 M216 30 L228 30 M240 30 L276 30 M288 30 L300 30 M0 42 L12 42 M24 42 L60 42 M72 42 L84 42 M108 42 L120 42 M156 42 L192 42 M216 42 L228 42 M240 42 L276 42 M288 42 L300 42 M0 54 L12 54 M24 54 L60 54 M72 54 L84 54 M96 54 L108 54 M144 54 L156 54 M168 54 L192 54 M216 54 L228 54 M240 54 L276 54 M288 54 L300 54 M0 66 L12 66 M72 66 L84 66 M108 66 L120 66 M132 66 L144 66 M156 66 L168 66 M180 66 L192 66 M216 66 L228 66 M288 66 L300 66 M0 78 L84 78 M96 78 L108 78 M120 78 L132 78 M144 78 L156 78 M168 78 L180 78 M192 78 L204 78 M216 78 L300 78 M120 90 L132 90 M144 90 L204 90 M0 102 L12 102 M24 102 L36 102 M48 102 L60 102 M72 102 L84 102 M108 102 L120 102 M132 102 L144 102 M168 102 L180 102 M192 102 L204 102 M240 102 L252 102 M276 102 L288 102 M12 114 L24 114 M60 114 L72 114 M108 114 L132 114 M144 114 L156 114 M168 114 L180 114 M192 114 L240 114 M252 114 L300 114 M12 126 L24 126 M36 126 L60 126 M72 126 L84 126 M96 126 L108 126 M144 126 L168 126 M216 126 L300 126 M0 138 L72 138 M84 138 L96 138 M108 138 L132 138 M144 138 L156 138 M192 138 L216 138 M228 138 L240 138 M276 138 L288 138 M60 150 L120 150 M144 150 L156 150 M180 150 L228 150 M252 150 L264 150 M12 162 L72 162 M84 162 L96 162 M108 162 L120 162 M132 162 L168 162 M192 162 L204 162 M252 162 L264 162 M276 162 L300 162 M0 174 L12 174 M36 174 L96 174 M108 174 L120 174 M132 174 L156 174 M168 174 L180 174 M216 174 L228 174 M240 174 L264 174 M276 174 L300 174 M12 186 L72 186 M96 186 L132 186 M144 186 L180 186 M228 186 L240 186 M252 186 L264 186 M276 186 L288 186 M0 198 L12 198 M36 198 L48 198 M72 198 L96 198 M108 198 L120 198 M132 198 L144 198 M168 198 L180 198 M192 198 L252 198 M276 198 L300 198 M96 210 L120 210 M132 210 L144 210 M168 210 L204 210 M240 210 L264 210 M288 210 L300 210 M0 222 L84 222 M108 222 L132 222 M156 222 L168 222 M180 222 L204 222 M216 222 L228 222 M240 222 L252 222 M264 222 L300 222 M0 234 L12 234 M72 234 L84 234 M108 234 L120 234 M132 234 L144 234 M192 234 L204 234 M240 234 L252 234 M0 246 L12 246 M24 246 L60 246 M72 246 L84 246 M96 246 L132 246 M144 246 L156 246 M192 246 L252 246 M288 246 L300 246 M0 258 L12 258 M24 258 L60 258 M72 258 L84 258 M108 258 L120 258 M132 258 L168 258 M180 258 L192 258 M228 258 L276 258 M0 270 L12 270 M24 270 L60 270 M72 270 L84 270 M96 270 L108 270 M120 270 L156 270 M168 270 L180 270 M192 270 L228 270 M240 270 L276 270 M288 270 L300 270 M0 282 L12 282 M72 282 L84 282 M144 282 L216 282 M240 282 L252 282 M276 282 L288 282 M0 294 L84 294 M96 294 L144 294 M168 294 L180 294 M192 294 L204 294 M240 294 L264 294 M276 294 L300 294 "
+              propList={
+                Array [
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                ]
+              }
+              stroke={4278190080}
+              strokeLinecap={0}
+              strokeWidth={12}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#ffff",
+            "borderRadius": 10,
+            "padding": 20,
+            "top": "5%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "black",
+              "fontSize": 20,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityLabel="navigateToQRCodeMenu"
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#ffff",
+            "borderRadius": 10,
+            "left": 0,
+            "opacity": 1,
+            "padding": 10,
+            "position": "absolute",
+          }
+        }
+      >
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "black",
+                "fontSize": 20,
+              }
+            }
+          >
+            Go Back
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`does the menu navigates correctly should call navigate to QRCodeMenu on press event go back 1`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "fontSize": 32,
+      }
+    }
+  >
+    QR Codes Collection
+  </Text>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": null,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="navigateToQRCodeMenu"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#ffff",
+          "borderRadius": 10,
+          "left": 0,
+          "opacity": 1,
+          "padding": 10,
+          "position": "absolute",
+        }
+      }
+    >
+      <View>
+        <Text>
+          Go Back
+        </Text>
+      </View>
+    </View>
+    <Text>
+      Collection is empty
+    </Text>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`does the menu navigates correctly should call navigate to QRCodeMenu on press event go back 2`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "fontSize": 32,
+      }
+    }
+  >
+    QR Codes Collection
+  </Text>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": null,
+      }
+    }
+  >
+    <View>
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={300}
+        bbWidth={300}
+        focusable={false}
+        height={300}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            Object {
+              "flex": 0,
+              "height": 300,
+              "width": 300,
+            },
+          ]
+        }
+        vbHeight={300}
+        vbWidth={300}
+        width={300}
+      >
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -65536,
+                  1,
+                  -16711681,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={0}
+              name="grad"
+              x1="0%"
+              x2="100%"
+              y1="0%"
+              y2="100%"
+            />
+          </RNSVGDefs>
+          <RNSVGGroup>
+            <RNSVGRect
+              fill={4294967295}
+              height={300}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+              width={300}
+              x={-0}
+              y={-0}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M0 6 L84 6 M144 6 L180 6 M192 6 L204 6 M216 6 L300 6 M0 18 L12 18 M72 18 L84 18 M96 18 L156 18 M168 18 L204 18 M216 18 L228 18 M288 18 L300 18 M0 30 L12 30 M24 30 L60 30 M72 30 L84 30 M108 30 L120 30 M144 30 L180 30 M216 30 L228 30 M240 30 L276 30 M288 30 L300 30 M0 42 L12 42 M24 42 L60 42 M72 42 L84 42 M108 42 L120 42 M156 42 L192 42 M216 42 L228 42 M240 42 L276 42 M288 42 L300 42 M0 54 L12 54 M24 54 L60 54 M72 54 L84 54 M96 54 L108 54 M144 54 L156 54 M168 54 L192 54 M216 54 L228 54 M240 54 L276 54 M288 54 L300 54 M0 66 L12 66 M72 66 L84 66 M108 66 L120 66 M132 66 L144 66 M156 66 L168 66 M180 66 L192 66 M216 66 L228 66 M288 66 L300 66 M0 78 L84 78 M96 78 L108 78 M120 78 L132 78 M144 78 L156 78 M168 78 L180 78 M192 78 L204 78 M216 78 L300 78 M120 90 L132 90 M144 90 L204 90 M0 102 L12 102 M24 102 L36 102 M48 102 L60 102 M72 102 L84 102 M108 102 L120 102 M132 102 L144 102 M168 102 L180 102 M192 102 L204 102 M240 102 L252 102 M276 102 L288 102 M12 114 L24 114 M60 114 L72 114 M108 114 L132 114 M144 114 L156 114 M168 114 L180 114 M192 114 L240 114 M252 114 L300 114 M12 126 L24 126 M36 126 L60 126 M72 126 L84 126 M96 126 L108 126 M144 126 L168 126 M216 126 L300 126 M0 138 L72 138 M84 138 L96 138 M108 138 L132 138 M144 138 L156 138 M192 138 L216 138 M228 138 L240 138 M276 138 L288 138 M60 150 L120 150 M144 150 L156 150 M180 150 L228 150 M252 150 L264 150 M12 162 L72 162 M84 162 L96 162 M108 162 L120 162 M132 162 L168 162 M192 162 L204 162 M252 162 L264 162 M276 162 L300 162 M0 174 L12 174 M36 174 L96 174 M108 174 L120 174 M132 174 L156 174 M168 174 L180 174 M216 174 L228 174 M240 174 L264 174 M276 174 L300 174 M12 186 L72 186 M96 186 L132 186 M144 186 L180 186 M228 186 L240 186 M252 186 L264 186 M276 186 L288 186 M0 198 L12 198 M36 198 L48 198 M72 198 L96 198 M108 198 L120 198 M132 198 L144 198 M168 198 L180 198 M192 198 L252 198 M276 198 L300 198 M96 210 L120 210 M132 210 L144 210 M168 210 L204 210 M240 210 L264 210 M288 210 L300 210 M0 222 L84 222 M108 222 L132 222 M156 222 L168 222 M180 222 L204 222 M216 222 L228 222 M240 222 L252 222 M264 222 L300 222 M0 234 L12 234 M72 234 L84 234 M108 234 L120 234 M132 234 L144 234 M192 234 L204 234 M240 234 L252 234 M0 246 L12 246 M24 246 L60 246 M72 246 L84 246 M96 246 L132 246 M144 246 L156 246 M192 246 L252 246 M288 246 L300 246 M0 258 L12 258 M24 258 L60 258 M72 258 L84 258 M108 258 L120 258 M132 258 L168 258 M180 258 L192 258 M228 258 L276 258 M0 270 L12 270 M24 270 L60 270 M72 270 L84 270 M96 270 L108 270 M120 270 L156 270 M168 270 L180 270 M192 270 L228 270 M240 270 L276 270 M288 270 L300 270 M0 282 L12 282 M72 282 L84 282 M144 282 L216 282 M240 282 L252 282 M276 282 L288 282 M0 294 L84 294 M96 294 L144 294 M168 294 L180 294 M192 294 L204 294 M240 294 L264 294 M276 294 L300 294 "
+              propList={
+                Array [
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                ]
+              }
+              stroke={4278190080}
+              strokeLinecap={0}
+              strokeWidth={12}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#ffff",
+            "borderRadius": 10,
+            "padding": 20,
+            "top": "5%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "black",
+              "fontSize": 20,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityLabel="navigateToQRCodeMenu"
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#ffff",
+            "borderRadius": 10,
+            "left": 0,
+            "opacity": 1,
+            "padding": 10,
+            "position": "absolute",
+          }
+        }
+      >
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "black",
+                "fontSize": 20,
+              }
+            }
+          >
+            Go Back
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`does the menu renders renders 1`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "fontSize": 32,
+      }
+    }
+  >
+    QR Codes Collection
+  </Text>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": null,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="navigateToQRCodeMenu"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#ffff",
+          "borderRadius": 10,
+          "left": 0,
+          "opacity": 1,
+          "padding": 10,
+          "position": "absolute",
+        }
+      }
+    >
+      <View>
+        <Text>
+          Go Back
+        </Text>
+      </View>
+    </View>
+    <Text>
+      Collection is empty
+    </Text>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`does the menu renders renders correctly the error view 1`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "fontSize": 32,
+      }
+    }
+  >
+    QR Codes Collection
+  </Text>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": null,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="navigateToQRCodeMenu"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#ffff",
+          "borderRadius": 10,
+          "left": 0,
+          "opacity": 1,
+          "padding": 10,
+          "position": "absolute",
+        }
+      }
+    >
+      <View>
+        <Text>
+          Go Back
+        </Text>
+      </View>
+    </View>
+    <Text>
+      Collection is empty
+    </Text>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`does the menu renders renders correctly the success view 1`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "fontSize": 32,
+      }
+    }
+  >
+    QR Codes Collection
+  </Text>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": null,
+      }
+    }
+  >
+    <View>
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={300}
+        bbWidth={300}
+        focusable={false}
+        height={300}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            Object {
+              "flex": 0,
+              "height": 300,
+              "width": 300,
+            },
+          ]
+        }
+        vbHeight={300}
+        vbWidth={300}
+        width={300}
+      >
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -65536,
+                  1,
+                  -16711681,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={0}
+              name="grad"
+              x1="0%"
+              x2="100%"
+              y1="0%"
+              y2="100%"
+            />
+          </RNSVGDefs>
+          <RNSVGGroup>
+            <RNSVGRect
+              fill={4294967295}
+              height={300}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+              width={300}
+              x={-0}
+              y={-0}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M0 6 L84 6 M144 6 L180 6 M192 6 L204 6 M216 6 L300 6 M0 18 L12 18 M72 18 L84 18 M96 18 L156 18 M168 18 L204 18 M216 18 L228 18 M288 18 L300 18 M0 30 L12 30 M24 30 L60 30 M72 30 L84 30 M108 30 L120 30 M144 30 L180 30 M216 30 L228 30 M240 30 L276 30 M288 30 L300 30 M0 42 L12 42 M24 42 L60 42 M72 42 L84 42 M108 42 L120 42 M156 42 L192 42 M216 42 L228 42 M240 42 L276 42 M288 42 L300 42 M0 54 L12 54 M24 54 L60 54 M72 54 L84 54 M96 54 L108 54 M144 54 L156 54 M168 54 L192 54 M216 54 L228 54 M240 54 L276 54 M288 54 L300 54 M0 66 L12 66 M72 66 L84 66 M108 66 L120 66 M132 66 L144 66 M156 66 L168 66 M180 66 L192 66 M216 66 L228 66 M288 66 L300 66 M0 78 L84 78 M96 78 L108 78 M120 78 L132 78 M144 78 L156 78 M168 78 L180 78 M192 78 L204 78 M216 78 L300 78 M120 90 L132 90 M144 90 L204 90 M0 102 L12 102 M24 102 L36 102 M48 102 L60 102 M72 102 L84 102 M108 102 L120 102 M132 102 L144 102 M168 102 L180 102 M192 102 L204 102 M240 102 L252 102 M276 102 L288 102 M12 114 L24 114 M60 114 L72 114 M108 114 L132 114 M144 114 L156 114 M168 114 L180 114 M192 114 L240 114 M252 114 L300 114 M12 126 L24 126 M36 126 L60 126 M72 126 L84 126 M96 126 L108 126 M144 126 L168 126 M216 126 L300 126 M0 138 L72 138 M84 138 L96 138 M108 138 L132 138 M144 138 L156 138 M192 138 L216 138 M228 138 L240 138 M276 138 L288 138 M60 150 L120 150 M144 150 L156 150 M180 150 L228 150 M252 150 L264 150 M12 162 L72 162 M84 162 L96 162 M108 162 L120 162 M132 162 L168 162 M192 162 L204 162 M252 162 L264 162 M276 162 L300 162 M0 174 L12 174 M36 174 L96 174 M108 174 L120 174 M132 174 L156 174 M168 174 L180 174 M216 174 L228 174 M240 174 L264 174 M276 174 L300 174 M12 186 L72 186 M96 186 L132 186 M144 186 L180 186 M228 186 L240 186 M252 186 L264 186 M276 186 L288 186 M0 198 L12 198 M36 198 L48 198 M72 198 L96 198 M108 198 L120 198 M132 198 L144 198 M168 198 L180 198 M192 198 L252 198 M276 198 L300 198 M96 210 L120 210 M132 210 L144 210 M168 210 L204 210 M240 210 L264 210 M288 210 L300 210 M0 222 L84 222 M108 222 L132 222 M156 222 L168 222 M180 222 L204 222 M216 222 L228 222 M240 222 L252 222 M264 222 L300 222 M0 234 L12 234 M72 234 L84 234 M108 234 L120 234 M132 234 L144 234 M192 234 L204 234 M240 234 L252 234 M0 246 L12 246 M24 246 L60 246 M72 246 L84 246 M96 246 L132 246 M144 246 L156 246 M192 246 L252 246 M288 246 L300 246 M0 258 L12 258 M24 258 L60 258 M72 258 L84 258 M108 258 L120 258 M132 258 L168 258 M180 258 L192 258 M228 258 L276 258 M0 270 L12 270 M24 270 L60 270 M72 270 L84 270 M96 270 L108 270 M120 270 L156 270 M168 270 L180 270 M192 270 L228 270 M240 270 L276 270 M288 270 L300 270 M0 282 L12 282 M72 282 L84 282 M144 282 L216 282 M240 282 L252 282 M276 282 L288 282 M0 294 L84 294 M96 294 L144 294 M168 294 L180 294 M192 294 L204 294 M240 294 L264 294 M276 294 L300 294 "
+              propList={
+                Array [
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                ]
+              }
+              stroke={4278190080}
+              strokeLinecap={0}
+              strokeWidth={12}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#ffff",
+            "borderRadius": 10,
+            "padding": 20,
+            "top": "5%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "black",
+              "fontSize": 20,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityLabel="navigateToQRCodeMenu"
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#ffff",
+            "borderRadius": 10,
+            "left": 0,
+            "opacity": 1,
+            "padding": 10,
+            "position": "absolute",
+          }
+        }
+      >
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "black",
+                "fontSize": 20,
+              }
+            }
+          >
+            Go Back
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTSafeAreaView>,
+]
+`;
+
+exports[`does the menu renders should call navigate to QRCodeMenu on press event go back 1`] = `
+Array [
+  <Text
+    style={
+      Object {
+        "fontSize": 32,
+      }
+    }
+  >
+    QR Codes Collection
+  </Text>,
+  <RCTSafeAreaView
+    emulateUnlessSupported={true}
+    style={
+      Object {
+        "flex": 1,
+        "paddingTop": null,
+      }
+    }
+  >
+    <View>
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={300}
+        bbWidth={300}
+        focusable={false}
+        height={300}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            Object {
+              "flex": 0,
+              "height": 300,
+              "width": 300,
+            },
+          ]
+        }
+        vbHeight={300}
+        vbWidth={300}
+        width={300}
+      >
+        <RNSVGGroup>
+          <RNSVGDefs>
+            <RNSVGLinearGradient
+              gradient={
+                Array [
+                  0,
+                  -65536,
+                  1,
+                  -16711681,
+                ]
+              }
+              gradientTransform={null}
+              gradientUnits={0}
+              name="grad"
+              x1="0%"
+              x2="100%"
+              y1="0%"
+              y2="100%"
+            />
+          </RNSVGDefs>
+          <RNSVGGroup>
+            <RNSVGRect
+              fill={4294967295}
+              height={300}
+              propList={
+                Array [
+                  "fill",
+                ]
+              }
+              width={300}
+              x={-0}
+              y={-0}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup>
+            <RNSVGPath
+              d="M0 6 L84 6 M144 6 L180 6 M192 6 L204 6 M216 6 L300 6 M0 18 L12 18 M72 18 L84 18 M96 18 L156 18 M168 18 L204 18 M216 18 L228 18 M288 18 L300 18 M0 30 L12 30 M24 30 L60 30 M72 30 L84 30 M108 30 L120 30 M144 30 L180 30 M216 30 L228 30 M240 30 L276 30 M288 30 L300 30 M0 42 L12 42 M24 42 L60 42 M72 42 L84 42 M108 42 L120 42 M156 42 L192 42 M216 42 L228 42 M240 42 L276 42 M288 42 L300 42 M0 54 L12 54 M24 54 L60 54 M72 54 L84 54 M96 54 L108 54 M144 54 L156 54 M168 54 L192 54 M216 54 L228 54 M240 54 L276 54 M288 54 L300 54 M0 66 L12 66 M72 66 L84 66 M108 66 L120 66 M132 66 L144 66 M156 66 L168 66 M180 66 L192 66 M216 66 L228 66 M288 66 L300 66 M0 78 L84 78 M96 78 L108 78 M120 78 L132 78 M144 78 L156 78 M168 78 L180 78 M192 78 L204 78 M216 78 L300 78 M120 90 L132 90 M144 90 L204 90 M0 102 L12 102 M24 102 L36 102 M48 102 L60 102 M72 102 L84 102 M108 102 L120 102 M132 102 L144 102 M168 102 L180 102 M192 102 L204 102 M240 102 L252 102 M276 102 L288 102 M12 114 L24 114 M60 114 L72 114 M108 114 L132 114 M144 114 L156 114 M168 114 L180 114 M192 114 L240 114 M252 114 L300 114 M12 126 L24 126 M36 126 L60 126 M72 126 L84 126 M96 126 L108 126 M144 126 L168 126 M216 126 L300 126 M0 138 L72 138 M84 138 L96 138 M108 138 L132 138 M144 138 L156 138 M192 138 L216 138 M228 138 L240 138 M276 138 L288 138 M60 150 L120 150 M144 150 L156 150 M180 150 L228 150 M252 150 L264 150 M12 162 L72 162 M84 162 L96 162 M108 162 L120 162 M132 162 L168 162 M192 162 L204 162 M252 162 L264 162 M276 162 L300 162 M0 174 L12 174 M36 174 L96 174 M108 174 L120 174 M132 174 L156 174 M168 174 L180 174 M216 174 L228 174 M240 174 L264 174 M276 174 L300 174 M12 186 L72 186 M96 186 L132 186 M144 186 L180 186 M228 186 L240 186 M252 186 L264 186 M276 186 L288 186 M0 198 L12 198 M36 198 L48 198 M72 198 L96 198 M108 198 L120 198 M132 198 L144 198 M168 198 L180 198 M192 198 L252 198 M276 198 L300 198 M96 210 L120 210 M132 210 L144 210 M168 210 L204 210 M240 210 L264 210 M288 210 L300 210 M0 222 L84 222 M108 222 L132 222 M156 222 L168 222 M180 222 L204 222 M216 222 L228 222 M240 222 L252 222 M264 222 L300 222 M0 234 L12 234 M72 234 L84 234 M108 234 L120 234 M132 234 L144 234 M192 234 L204 234 M240 234 L252 234 M0 246 L12 246 M24 246 L60 246 M72 246 L84 246 M96 246 L132 246 M144 246 L156 246 M192 246 L252 246 M288 246 L300 246 M0 258 L12 258 M24 258 L60 258 M72 258 L84 258 M108 258 L120 258 M132 258 L168 258 M180 258 L192 258 M228 258 L276 258 M0 270 L12 270 M24 270 L60 270 M72 270 L84 270 M96 270 L108 270 M120 270 L156 270 M168 270 L180 270 M192 270 L228 270 M240 270 L276 270 M288 270 L300 270 M0 282 L12 282 M72 282 L84 282 M144 282 L216 282 M240 282 L252 282 M276 282 L288 282 M0 294 L84 294 M96 294 L144 294 M168 294 L180 294 M192 294 L204 294 M240 294 L264 294 M276 294 L300 294 "
+              propList={
+                Array [
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                ]
+              }
+              stroke={4278190080}
+              strokeLinecap={0}
+              strokeWidth={12}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#ffff",
+            "borderRadius": 10,
+            "padding": 20,
+            "top": "5%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "black",
+              "fontSize": 20,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityLabel="navigateToQRCodeMenu"
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "backgroundColor": "#ffff",
+            "borderRadius": 10,
+            "left": 0,
+            "opacity": 1,
+            "padding": 10,
+            "position": "absolute",
+          }
+        }
+      >
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "black",
+                "fontSize": 20,
+              }
+            }
+          >
+            Go Back
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTSafeAreaView>,
+]
+`;

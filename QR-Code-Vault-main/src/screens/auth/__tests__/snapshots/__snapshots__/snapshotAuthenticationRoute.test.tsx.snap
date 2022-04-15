@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#202020",
+      "flex": 1,
+      "height": "100%",
+      "top": "5%",
+    }
+  }
+>
+  <View>
+    <ActivityIndicator
+      accessibilityLabel="loadingIndicator"
+      size="large"
+    />
+  </View>
+</View>
+`;
+
+exports[`renders correctly 2`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#202020",
+      "flex": 1,
+      "height": "100%",
+      "top": "5%",
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "height": 1334,
+          "width": 750,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontFamily": "Roboto",
+            "fontSize": 35,
+            "letterSpacing": 1,
+          }
+        }
+      >
+        QR Code Vault
+      </Text>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "marginTop": "20%",
+          }
+        }
+      >
+        <View
+          accessibilityLabel="isBiometricSignInSupportedButton"
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#01a3ea",
+                "borderRadius": 5,
+                "justifyContent": "center",
+                "margin": 10,
+                "padding": 10,
+                "paddingBottom": 15,
+                "paddingTop": 15,
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#ffff",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "700",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              Sign in
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

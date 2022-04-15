@@ -20,7 +20,7 @@ const BiometricAuth: FC<Props> = props => {
             User canceled authentication
           </Text>
           <TouchableOpacity
-            testID={'pinCodeBackUpTouchableOpacity'}
+            accessibilityLabel="pinCodeBackUpTouchableOpacity"
             onPress={() => props.navigation.navigate('PinCodeBackupAuth')}>
             <View style={styles.button}>
               <Text style={styles.signInButton}>Sign In with pin code</Text>

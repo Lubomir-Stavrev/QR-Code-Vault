@@ -1,7 +1,7 @@
 import React from 'react';
-import QRCodeScan from '../QRCodeScan';
+import QRCodeScan from '../../QRCodeScan';
 import {render} from '@testing-library/react-native';
-import {useSaveQRCode} from '../queryServices/useSaveQRCode';
+import {useSaveQRCode} from '../../queryServices/useSaveQRCode';
 jest.mock('react-native-snackbar', () => ({
   Snackbar: {show: jest.fn()},
 }));
@@ -17,7 +17,7 @@ jest.mock('react-native-encrypted-storage', () => {
   return RNEncryptedStorage;
 });
 
-jest.mock('../queryServices/useSaveQRCode', () => ({
+jest.mock('../../queryServices/useSaveQRCode', () => ({
   useSaveQRCode: jest.fn(),
 }));
 interface SaveQRCode {

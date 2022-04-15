@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {
   View,
   Text,
@@ -11,14 +11,14 @@ import {
 import QRCode from 'react-native-qrcode-svg';
 import Snackbar from 'react-native-snackbar';
 import styles from '../../styles/QRCodeStyles';
-import { useGetQRCodesData } from './queryServices/useGetQRCodesData';
-import { useGetOne } from './queryServices/useGetOne';
-import { useDeleteQRCode } from './queryServices/useDeleteQRCode';
+import {useGetQRCodesData} from './queryServices/useGetQRCodesData';
+import {useGetOne} from './queryServices/useGetOne';
+import {useDeleteQRCode} from './queryServices/useDeleteQRCode';
 
 interface Props {
-  navigation: { navigate: (text: string) => void };
+  navigation: {navigate: (text: string) => void};
 }
-const UserQrCodes: FC<Props> = ({ navigation }) => {
+const UserQrCodes: FC<Props> = ({navigation}) => {
   const getQRCodesData = useGetQRCodesData();
   const deleteQRCode = useDeleteQRCode();
   const showPressedQRCode = useGetOne();
@@ -32,21 +32,22 @@ const UserQrCodes: FC<Props> = ({ navigation }) => {
           <Text style={styles.bigText}>QR Codes Collection</Text>
           {getQRCodesData.isError
             ? Snackbar.show({
-              text: "Couldn't get QR codes collection.",
-              duration: Snackbar.LENGTH_INDEFINITE,
-              action: {
-                text: 'go to menu',
-                textColor: 'green',
-                onPress: () => {
-                  navigation.navigate('QRCodeMenu');
+                text: "Couldn't get QR codes collection.",
+                duration: Snackbar.LENGTH_INDEFINITE,
+                action: {
+                  text: 'go to menu',
+                  textColor: 'green',
+                  onPress: () => {
+                    navigation.navigate('QRCodeMenu');
+                  },
                 },
-              },
-            })
+              })
             : null}
           <SafeAreaView style={styles.scrollViewContainer}>
             {!showPressedQRCode.isSuccess ? (
               <>
                 <TouchableOpacity
+                  accessibilityLabel="navigateToQRCodeMenu"
                   style={styles.goBackButton}
                   onPress={() => navigation.navigate('QRCodeMenu')}>
                   <View>
@@ -84,6 +85,7 @@ const UserQrCodes: FC<Props> = ({ navigation }) => {
                   </Text>
                 </View>
                 <TouchableOpacity
+                  accessibilityLabel="navigateToQRCodeMenu"
                   style={styles.goBackButton}
                   onPress={() => navigation.navigate('QRCodeMenu')}>
                   <View>

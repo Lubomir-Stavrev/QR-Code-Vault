@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {ActivityIndicator, View, Text} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import styles from '../../styles/AuthStyles';
 
 import PINCode from '@haskkor/react-native-pincode';

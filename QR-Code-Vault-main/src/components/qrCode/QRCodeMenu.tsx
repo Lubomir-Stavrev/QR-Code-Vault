@@ -14,12 +14,14 @@ const QRCodeRoute: FC<Props> = props => {
           <Text style={styles.qrMenuTitle}>QR Code Vault</Text>
           <View>
             <TouchableOpacity
+              accessibilityLabel="navigateToQRCodeScan"
               onPress={() => props.navigation.navigate('QRCodeScan')}>
               <View style={styles.menuButtonContainer}>
                 <Text style={styles.menuButtonText}>Scan QR CODE</Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
+              accessibilityLabel="navigateToUserQRCodes"
               onPress={() => props.navigation.navigate('UserQrCodes')}>
               <View style={styles.menuButtonContainer}>
                 <Text style={styles.menuButtonText}>

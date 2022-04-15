@@ -19,6 +19,7 @@ const Authentication: FC<Props> = ({navigation}) => {
             <Text style={authStyles.authTitleText}>QR Code Vault</Text>
             <View style={authStyles.signInButtonContainer}>
               <TouchableOpacity
+                accessibilityLabel="isBiometricSignInSupportedButton"
                 onPress={() => isBiometricSignInSupported.mutateAsync()}>
                 <View style={authStyles.button}>
                   <Text style={authStyles.buttonText}>Sign in</Text>
@@ -27,7 +28,10 @@ const Authentication: FC<Props> = ({navigation}) => {
             </View>
           </View>
         ) : (
-          <ActivityIndicator size="large" />
+          <ActivityIndicator
+            accessibilityLabel="loadingIndicator"
+            size="large"
+          />
         )}
       </View>
     </View>

@@ -1,6 +1,6 @@
 import React from 'react';
-import PinCodeBackup from '../PinCodeBackup';
-import {useHasUserSetPinData} from '../useHasUserSetPinData';
+import PinCodeBackup from '../../PinCodeBackup';
+import {useHasUserSetPinData} from '../../useHasUserSetPinData';
 import {render} from '@testing-library/react-native';
 
 jest.mock('@haskkor/react-native-pincode', () => jest.fn());
@@ -12,10 +12,10 @@ jest.mock('react-native-snackbar', () => ({
   show: jest.fn(),
 }));
 
-jest.mock('../useHasUserSetPinData', () => ({
+jest.mock('../../useHasUserSetPinData', () => ({
   useHasUserSetPinData: jest.fn(),
 }));
-jest.mock('../useSavePinInKeyChain', () => ({
+jest.mock('../../useSavePinInKeyChain', () => ({
   useSavePinInKeyChain: jest.fn(),
 }));
 interface UserSetPinData {

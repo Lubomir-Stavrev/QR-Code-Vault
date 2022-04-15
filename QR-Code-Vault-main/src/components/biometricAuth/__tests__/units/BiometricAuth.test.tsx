@@ -1,9 +1,9 @@
 import React from 'react';
-import BiometricAuth from '../BiometricAuth';
-import {useAuthenticateId} from '../useAuthenticateId';
-import {render, fireEvent} from '@testing-library/react-native';
+import BiometricAuth from '../../BiometricAuth';
+import {useAuthenticateId} from '../../useAuthenticateId';
+import {render} from '@testing-library/react-native';
 
-jest.mock('../useAuthenticateId', () => ({
+jest.mock('../../useAuthenticateId', () => ({
   useAuthenticateId: jest.fn(),
 }));
 
@@ -36,20 +36,5 @@ describe('does Biometric Authentication handles useAuthenticateId results correc
     const textComponent = rendered.getByTestId('textUserCanceledAuth');
 
     expect(textComponent).toBeTruthy();
-  });
-});
-
-describe('does Bimetric Authentication handles press events as it shoulds', () => {
-  it('should calls navigate to PinCodeBackupAuth on press', () => {
-    const spy = jest.spyOn(navigation, 'navigate');
-    mockUseAuthenticateId.mockImplementation(() => ({
-      isError: true,
-    }));
-    const rendered = render(<BiometricAuth navigation={navigation} />);
-    const pinCodeBackUpTouchableOpacityComponent = rendered.getByTestId(
-      'pinCodeBackUpTouchableOpacity',
-    );
-    fireEvent.press(pinCodeBackUpTouchableOpacityComponent);
-    expect(spy).toBeCalledWith('PinCodeBackupAuth');
   });
 });
