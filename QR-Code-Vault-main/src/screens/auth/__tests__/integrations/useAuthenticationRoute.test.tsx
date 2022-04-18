@@ -7,9 +7,6 @@ jest.mock('../../useIsBiometricSignInSupported', () => ({
   useIsBiometricSignInSupported: jest.fn(),
 }));
 
-jest.mock('react-query', () => ({
-  useQueryClient: jest.fn(),
-}));
 jest.mock('react-native-touch-id', () => ({
   isSupported: jest.fn(),
 }));

@@ -4,10 +4,7 @@ import {useHasUserSetPinData} from '../../useHasUserSetPinData';
 import {render} from '@testing-library/react-native';
 
 jest.mock('@haskkor/react-native-pincode', () => jest.fn());
-jest.mock('react-query', () => ({
-  useQueryClient: jest.fn(),
-  useMutation: jest.fn(),
-}));
+
 jest.mock('react-native-snackbar', () => ({
   show: jest.fn(),
 }));

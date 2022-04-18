@@ -15,7 +15,7 @@ const BiometricAuth: FC<Props> = props => {
       {isLoading ? (
         <ActivityIndicator testID={'ActivityIndicator'} size="large" />
       ) : isError ? (
-        <View>
+        <View accessibilityLabel="errorContainer">
           <Text testID={'textUserCanceledAuth'} style={styles.errorMessage}>
             User canceled authentication
           </Text>

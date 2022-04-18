@@ -7,11 +7,6 @@ import {useGetQRCodesData} from '../../queryServices/useGetQRCodesData';
 jest.mock('react-native-snackbar', () => ({
   show: jest.fn(),
 }));
-jest.mock('react-query', () => ({
-  useQueryClient: jest.fn(),
-  useQuery: jest.fn(),
-  useMutation: jest.fn(),
-}));
 jest.mock('../../queryServices/useGetOne', () => ({
   useGetOne: jest.fn(),
 }));
@@ -38,8 +33,10 @@ interface GetOne {
   isSuccess?: boolean;
   data?: any;
 }
+interface QRCodesData extends GetOne {}
+
 const mockUseHasGetOne = useGetOne as jest.Mock<GetOne>;
-const mockUseHasGetQRCodesData = useGetQRCodesData as jest.Mock<GetOne>;
+const mockUseHasGetQRCodesData = useGetQRCodesData as jest.Mock<QRCodesData>;
 
 describe('does the menu navigates correctly', () => {
   const navigation = {navigate: jest.fn()};

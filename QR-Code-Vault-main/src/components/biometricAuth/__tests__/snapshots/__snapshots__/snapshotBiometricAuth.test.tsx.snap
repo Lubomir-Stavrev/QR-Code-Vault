@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bimetric Authentication renders activity indicatior correctly on loading 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#202020",
+        "flex": 1,
+        "height": "100%",
+        "top": "5%",
+      },
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "padding": 10,
+      },
+    ]
+  }
+>
+  <ActivityIndicator
+    size="large"
+    testID="ActivityIndicator"
+  />
+</View>
+`;
+
+exports[`Bimetric Authentication renders the error container correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#202020",
+        "flex": 1,
+        "height": "100%",
+        "top": "5%",
+      },
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-around",
+        "padding": 10,
+      },
+    ]
+  }
+>
+  <View
+    accessibilityLabel="errorContainer"
+  >
+    <Text
+      style={
+        Object {
+          "color": "#ffff",
+          "fontFamily": "Roboto",
+          "fontSize": 30,
+          "fontWeight": "900",
+          "letterSpacing": 1,
+          "marginBottom": "10%",
+          "marginTop": "10%",
+        }
+      }
+      testID="textUserCanceledAuth"
+    >
+      User canceled authentication
+    </Text>
+    <View
+      accessibilityLabel="pinCodeBackUpTouchableOpacity"
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#01a3ea",
+            "borderRadius": 5,
+            "justifyContent": "center",
+            "margin": 10,
+            "padding": 10,
+            "paddingBottom": 15,
+            "paddingTop": 15,
+            "textAlign": "center",
+            "width": "100%",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#ffff",
+              "fontSize": 25,
+              "fontWeight": "900",
+              "letterSpacing": 1,
+            }
+          }
+        >
+          Sign In with pin code
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
