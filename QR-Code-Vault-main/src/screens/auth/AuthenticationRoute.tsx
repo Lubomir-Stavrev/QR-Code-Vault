@@ -12,7 +12,7 @@ const Authentication: FC<Props> = ({navigation}) => {
   const isBiometricSignInSupported = useIsBiometricSignInSupported(navigation);
 
   return (
-    <View style={authStyles.authContainer}>
+    <View accessibilityLabel="welcomeAuth" style={authStyles.authContainer}>
       <View>
         {!isBiometricSignInSupported.isLoading ? (
           <View style={authStyles.authTitleContainer}>

@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import styles from '../../styles/AuthStyles';
 
-import PINCode from '@haskkor/react-native-pincode';
+import PINCode from '../../e2e/__mocks__/PINCodeProvider';
 import Snackbar from 'react-native-snackbar';
 
 import {useHasUserSetPinData} from './useHasUserSetPinData';
@@ -19,7 +19,7 @@ const PinCodeBackup: FC<Props> = props => {
   const savePinInKeyChain = useSavePinInKeyChain();
 
   return (
-    <>
+    <View accessibilityLabel="pinCodeBackup" style={{flex: 1}}>
       {hasUserSetPinData.isLoading ? (
         <ActivityIndicator testID="ActivityIndicator" size="large" />
       ) : hasUserSetPinData.isSuccess ? (
@@ -60,7 +60,7 @@ const PinCodeBackup: FC<Props> = props => {
             : null}
         </>
       )}
-    </>
+    </View>
   );
 };
 

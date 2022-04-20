@@ -1,5 +1,5 @@
 {
-    "name": "qr-code-vault",
+    "name": "qrcodevault",
     "version": "0.0.1",
     "private": true,
     "scripts": {
@@ -41,6 +41,7 @@
         "@types/react-native": "^0.67.3",
         "@types/react-test-renderer": "^17.0.1",
         "babel-jest": "^26.6.3",
+        "detox": "^19.6.5",
         "eslint": "7.14.0",
         "jest": "^26.6.3",
         "metro-react-native-babel-preset": "^0.66.2",
@@ -51,6 +52,10 @@
         "transformIgnorePatterns": [
             "/node_modules/(?!deck.gl|react-native|react-native-touch-id|react-native-qrcode-scanner|react-native-qrcode-svg)/)"
         ]
-
+    },
+    "metro": {
+        "resolver": {
+            "sourceExts": "process.env.RN_SRC_EXT"
+        }
     }
 }

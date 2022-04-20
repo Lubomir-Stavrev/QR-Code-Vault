@@ -11,7 +11,9 @@ const BiometricAuth: FC<Props> = props => {
   const {isLoading, isError} = useAuthenticateId(props);
 
   return (
-    <View style={[styles.authContainer, styles.horizontal]}>
+    <View
+      accessibilityLabel="BiometricAuth"
+      style={[styles.authContainer, styles.horizontal]}>
       {isLoading ? (
         <ActivityIndicator testID={'ActivityIndicator'} size="large" />
       ) : isError ? (
