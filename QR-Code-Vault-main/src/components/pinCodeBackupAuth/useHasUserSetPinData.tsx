@@ -1,5 +1,8 @@
 import {useQuery} from 'react-query';
-import {hasUserSetPinCode} from '@haskkor/react-native-pincode';
+import {
+  hasUserSetPinCode,
+  deleteUserPinCode,
+} from '@haskkor/react-native-pincode';
 
 const pinCodeKeychainName = 'pincode';
 

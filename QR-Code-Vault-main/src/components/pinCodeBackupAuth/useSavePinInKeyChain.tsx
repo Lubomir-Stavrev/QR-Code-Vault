@@ -3,7 +3,9 @@ import * as Keychain from 'react-native-keychain';
 
 const pinCodeKeychainName = 'pincode';
 
-export const useSavePinInKeyChain = () => {
+export const useSavePinInKeyChain = (navigation: {
+  navigate: (text: string) => void;
+}) => {
   const saveToKeychain = (pin: string | undefined) => {
     if (pin) {
       return Keychain.setInternetCredentials(
@@ -15,8 +17,14 @@ export const useSavePinInKeyChain = () => {
       throw new Error();
     }
   };
-  const {mutate, isLoading, isError, isSuccess, data} =
-    useMutation(saveToKeychain);
+  const {mutate, isLoading, isError, isSuccess, data} = useMutation(
+    saveToKeychain,
+    {
+      onSuccess: () => {
+        navigation.navigate('QRCodeMenu');
+      },
+    },
+  );
 
   return {mutate, isLoading, isError, isSuccess, data};
 };

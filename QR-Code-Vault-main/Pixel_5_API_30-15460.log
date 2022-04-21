@@ -1,0 +1,38 @@
+INFO    | Android emulator version 30.9.5.0 (build_id 7820599) (CL:N/A)
+INFO    | Found AVD name 'Pixel_5_API_30'
+INFO    | Found AVD target architecture: x86
+INFO    | argv[0]: 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator\emulator.EXE'; program directory: 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator'
+VERBOSE |  Found directory: C:\Users\Frog\AppData\Local\Android\Sdk\system-images\android-30\google_apis\x86\
+INFO    | emuDirName: 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator'
+VERBOSE |  Found directory: C:\Users\Frog\AppData\Local\Android\Sdk\system-images\android-30\google_apis\x86\
+INFO    | Probing for C:\Users\Frog\AppData\Local\Android\Sdk\system-images\android-30\google_apis\x86\\kernel-ranchu-64: file exists
+INFO    | try dir C:\Users\Frog\AppData\Local\Android\Sdk\emulator
+INFO    | Trying emulator path 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe'
+INFO    | Found target-specific 64-bit emulator binary: C:\Users\Frog\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe
+INFO    | Adding library search path: 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator\lib64'
+INFO    | Adding library search path: 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator\lib64\gles_angle'
+INFO    | Adding library search path: 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator\lib64\gles_angle9'
+INFO    | Adding library search path: 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator\lib64\gles_angle11'
+INFO    | Adding library search path: 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator\lib64\gles_swiftshader'
+VERBOSE | Adding library search path for Qt: 'C:\Users\Frog\AppData\Local\Android\Sdk\emulator\lib64\qt\lib'
+VERBOSE | Silencing all qWarning(); use qCWarning(...) instead: QT_LOGGING_RULES=default.warning=false
+VERBOSE | Setting Qt plugin search path: QT_QPA_PLATFORM_PLUGIN_PATH=C:\Users\Frog\AppData\Local\Android\Sdk\emulator\lib64\qt\plugins
+VERBOSE | Setting Qt to use software OpenGL: QT_OPENGL=software
+VERBOSE | Setting QML to use software QtQuick2D: QMLSCENE_DEVICE=softwarecontext
+VERBOSE | Overriding pre-existing bad Qt high dpi settings...
+INFO    | Quoted param: [C:\Users\Frog\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe]
+INFO    | Quoted param: [-verbose]
+INFO    | Quoted param: [-no-audio]
+INFO    | Quoted param: [-no-boot-anim]
+INFO    | Quoted param: [-port]
+INFO    | Quoted param: [15460]
+INFO    | Quoted param: [@Pixel_5_API_30]
+VERBOSE | emulator: Running :C:\Users\Frog\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe
+VERBOSE | qemu backend: argv[00] = "C:\Users\Frog\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe"
+VERBOSE | qemu backend: argv[01] = "-verbose"
+VERBOSE | qemu backend: argv[02] = "-no-audio"
+VERBOSE | qemu backend: argv[03] = "-no-boot-anim"
+VERBOSE | qemu backend: argv[04] = "-port"
+VERBOSE | qemu backend: argv[05] = "15460"
+VERBOSE | qemu backend: argv[06] = "@Pixel_5_API_30"
+VERBOSE | Concatenated backend parameters:  C:\Users\Frog\AppData\Local\Android\Sdk\emulator\qemu\windows-x86_64\qemu-system-x86_64.exe -verbose -no-audio -no-boot-anim -port 15460 @Pixel_5_API_30

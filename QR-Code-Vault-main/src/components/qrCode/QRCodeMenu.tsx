@@ -8,7 +8,7 @@ interface Props {
 }
 const QRCodeRoute: FC<Props> = props => {
   return (
-    <View style={styles.qrContainer}>
+    <View style={styles.qrContainer} accessibilityLabel="QRCodeMenuContainer">
       <View>
         <View style={styles.qrMenuContainer}>
           <Text style={styles.qrMenuTitle}>QR Code Vault</Text>

@@ -65,6 +65,7 @@ const UserQrCodes: FC<Props> = ({navigation}) => {
                             <Text>Delete</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
+                            accessibilityLabel="viewQRCode"
                             onPress={() => showPressedQRCode.mutate(item?.id)}>
                             <QRCode value={item?.qrCodeData} />
                           </TouchableOpacity>
