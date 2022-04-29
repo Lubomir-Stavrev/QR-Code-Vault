@@ -1,0 +1,66 @@
+{
+    "name": "qrcodevault",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "android": "react-native run-android",
+        "ios": "react-native run-ios",
+        "start": "react-native start",
+        "test": "jest",
+        "lint": "eslint .",
+        "test-e2e": "detox test --configuration android.emu.debug"
+    },
+    "dependencies": {
+        "@haskkor/react-native-pincode": "^1.22.6",
+        "@react-native-async-storage/async-storage": "^1.17.3",
+        "@react-native-google-signin/google-signin": "^7.2.2",
+        "@react-navigation/native": "^6.0.8",
+        "@react-navigation/native-stack": "^6.5.2",
+        "react": "17.0.2",
+        "react-error-boundary": "^3.1.4",
+        "react-native": "0.67.4",
+        "react-native-camera": "^4.2.1",
+        "react-native-encrypted-storage": "^4.0.2",
+        "react-native-fs": "^2.19.0",
+        "react-native-google-drive-api-wrapper": "^1.4.0",
+        "react-native-keychain": "^8.0.0",
+        "react-native-permissions": "^3.3.1",
+        "react-native-qrcode-scanner": "^1.5.5",
+        "react-native-qrcode-svg": "^6.1.2",
+        "react-native-restart": "^0.0.24",
+        "react-native-safe-area-context": "^4.2.4",
+        "react-native-screens": "^3.13.1",
+        "react-native-snackbar": "^2.4.0",
+        "react-native-svg": "^12.3.0",
+        "react-native-touch-id": "^4.4.1",
+        "react-native-uuid": "^2.0.1",
+        "react-query": "^3.34.19",
+        "simple-common-utils": "^2.6.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.12.9",
+        "@babel/runtime": "^7.12.5",
+        "@react-native-community/eslint-config": "^2.0.0",
+        "@testing-library/react-native": "^9.1.0",
+        "@types/jest": "^27.4.1",
+        "@types/react-native": "^0.67.3",
+        "@types/react-test-renderer": "^17.0.1",
+        "babel-jest": "^26.6.3",
+        "detox": "^19.6.5",
+        "eslint": "7.14.0",
+        "jest": "^26.6.3",
+        "metro-react-native-babel-preset": "^0.66.2",
+        "react-test-renderer": "17.0.2"
+    },
+    "jest": {
+        "preset": "react-native",
+        "transformIgnorePatterns": [
+            "/node_modules/(?!deck.gl|react-native|react-native-touch-id|react-native-qrcode-scanner|react-native-qrcode-svg)/)"
+        ]
+    },
+    "metro": {
+        "resolver": {
+            "sourceExts": "process.env.RN_SRC_EXT"
+        }
+    }
+}
