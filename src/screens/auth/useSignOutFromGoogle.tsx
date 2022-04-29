@@ -7,11 +7,16 @@ interface Props {
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 export const useSignOutFromGoogle = (navigation: Props) => {
-  const signOut = async () => {
+  const signOutFromGoogle = async () => {
     await GoogleSignin.revokeAccess();
     return await GoogleSignin.signOut();
   };
-  const {mutate, isLoading, isError, isSuccess} = useMutation(signOut, {
+  const {
+    mutate: signOut,
+    isLoading,
+    isError,
+    isSuccess,
+  } = useMutation(signOutFromGoogle, {
     onSuccess: () => {
       navigation.navigate('Auth');
     },
@@ -20,5 +25,5 @@ export const useSignOutFromGoogle = (navigation: Props) => {
     },
   });
 
-  return {mutate, isLoading, isError, isSuccess};
+  return {signOut, isLoading, isError, isSuccess};
 };

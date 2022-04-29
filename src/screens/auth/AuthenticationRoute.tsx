@@ -14,8 +14,8 @@ interface Props {
 }
 
 const Authentication: FC<Props> = ({navigation}) => {
-  const isBiometricSignInSupported = useIsBiometricSignInSupported(navigation);
   const configureGoogleSignIn = useConfigureGoogleSignIn();
+  const isBiometricSignInSupported = useIsBiometricSignInSupported(navigation);
   const signInWithGoogle = useSignInWithGoogle(navigation);
   const signOutFromGoogle = useSignOutFromGoogle(navigation);
 
@@ -38,7 +38,11 @@ const Authentication: FC<Props> = ({navigation}) => {
                   <GoogleSigninButton
                     size={GoogleSigninButton.Size.Standard}
                     color={GoogleSigninButton.Color.Dark}
-                    onPress={() => signInWithGoogle.mutateAsync()}
+                    onPress={() =>
+                      signInWithGoogle
+                        .signIn()
+                        .then(() => navigation.navigate('QRCodeMenu'))
+                    }
                   />
                 </TouchableOpacity>
               ) : (
@@ -47,7 +51,7 @@ const Authentication: FC<Props> = ({navigation}) => {
                   size="large"
                 />
               )}
-              <TouchableOpacity onPress={() => signOutFromGoogle.mutate()}>
+              <TouchableOpacity onPress={() => signOutFromGoogle.signOut()}>
                 <View>
                   <Text>Sign Out</Text>
                 </View>

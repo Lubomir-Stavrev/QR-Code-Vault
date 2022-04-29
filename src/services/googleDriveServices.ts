@@ -1,12 +1,12 @@
 import encryptedStorage from './encryptedStorage';
-//@ts-ignore
-import {StaticUtils, ArrayStringifier} from 'simple-common-utils';
+
+const {StaticUtils, ArrayStringifier} = require('simple-common-utils');
 const _contentTypeJson = 'application/json; charset=UTF-8';
 const key =
   '593703282853-7522cadoh0u4vegingb458cmbul1gd6t.apps.googleusercontent.com';
 const secret = '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';
 
-const ddb = `--foo_bar_baz`;
+const ddb = '--foo_bar_baz';
 
 const mimeFolder = 'application/vnd.google-apps.folder';
 const _urlFiles = 'https://www.googleapis.com/drive/v3/files';
@@ -37,7 +37,7 @@ export default {
 
     const body =
       `\n${ddb}\n` +
-      `Content-Type: application/json; charset=UTF-8\n\n` +
+      'Content-Type: application/json; charset=UTF-8\n\n' +
       `${JSON.stringify(metadata)}\n\n${ddb}\n` +
       `Content-Type: ${mediaType}\n\n
       ${media}${ending}`;
@@ -113,6 +113,7 @@ export default {
   },
   async list(queryParams: {q: string}) {
     const accessToken = await encryptedStorage.getUserGoogleAccessToken();
+
     return fetch(`${_urlFiles}${this.stringifyQueryParams(queryParams)}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -127,10 +128,10 @@ export default {
     quoteIfString?: boolean,
   ) {
     const array: string[] = [];
-    Object.keys(queryParams).forEach(key =>
+    Object.keys(queryParams).forEach(paramKey =>
       array.push(
-        `${key}=${StaticUtils.safeQuoteIfString(
-          queryParams[key],
+        `${paramKey}=${StaticUtils.safeQuoteIfString(
+          queryParams[paramKey],
           quoteIfString,
         )}`,
       ),
