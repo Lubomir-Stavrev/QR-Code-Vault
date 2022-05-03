@@ -5,7 +5,6 @@ import authStyles from '../../styles/AuthStyles';
 import {useIsBiometricSignInSupported} from './useIsBiometricSignInSupported';
 import {useSignInWithGoogle} from './useSignInWithGoogle';
 import {useConfigureGoogleSignIn} from './useConfigureGoogleSignIn';
-import {useSignOutFromGoogle} from './useSignOutFromGoogle';
 
 import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
 
@@ -17,7 +16,6 @@ const Authentication: FC<Props> = ({navigation}) => {
   const configureGoogleSignIn = useConfigureGoogleSignIn();
   const isBiometricSignInSupported = useIsBiometricSignInSupported(navigation);
   const signInWithGoogle = useSignInWithGoogle(navigation);
-  const signOutFromGoogle = useSignOutFromGoogle(navigation);
 
   return (
     <View accessibilityLabel="welcomeAuth" style={authStyles.authContainer}>
@@ -51,11 +49,6 @@ const Authentication: FC<Props> = ({navigation}) => {
                   size="large"
                 />
               )}
-              <TouchableOpacity onPress={() => signOutFromGoogle.signOut()}>
-                <View>
-                  <Text>Sign Out</Text>
-                </View>
-              </TouchableOpacity>
             </View>
           </View>
         ) : (

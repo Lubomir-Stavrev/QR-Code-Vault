@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`renders correctly the activity indicator 1`] = `
 <View
+  accessibilityLabel="welcomeAuth"
   style={
     Object {
       "alignItems": "center",
@@ -21,8 +22,9 @@ exports[`renders correctly 1`] = `
 </View>
 `;
 
-exports[`renders correctly 2`] = `
+exports[`renders correctly the authentication route 1`] = `
 <View
+  accessibilityLabel="welcomeAuth"
   style={
     Object {
       "alignItems": "center",
@@ -114,6 +116,10 @@ exports[`renders correctly 2`] = `
             </Text>
           </View>
         </View>
+        <ActivityIndicator
+          accessibilityLabel="loadingIndicator"
+          size="large"
+        />
       </View>
     </View>
   </View>

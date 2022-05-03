@@ -1,8 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PinCodeBackup renders correctly 1`] = `
-<ActivityIndicator
-  size="large"
-  testID="ActivityIndicator"
-/>
+<View
+  accessibilityLabel="pinCodeBackup"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ActivityIndicator
+    size="large"
+    testID="ActivityIndicator"
+  />
+</View>
 `;

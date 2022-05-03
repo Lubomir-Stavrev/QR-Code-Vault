@@ -2,6 +2,7 @@
 
 exports[`QRCodeMenu renders correctly 1`] = `
 <View
+  accessibilityLabel="QRCodeMenuContainer"
   style={
     Object {
       "alignItems": "center",
