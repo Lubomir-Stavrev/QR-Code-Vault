@@ -12,6 +12,7 @@ jest.mock('react-query', () => ({
 }));
 
 interface AuthenticateId {
+  isSuccess?: boolean;
   isLoading?: boolean;
   isError?: boolean;
 }

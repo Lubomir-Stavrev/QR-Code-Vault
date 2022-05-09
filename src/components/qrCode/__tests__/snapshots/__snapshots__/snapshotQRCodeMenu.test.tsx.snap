@@ -134,6 +134,55 @@ exports[`QRCodeMenu renders correctly 1`] = `
             </Text>
           </View>
         </View>
+        <View
+          accessibilityLabel="syncData"
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#01a3ea",
+                "borderRadius": 5,
+                "justifyContent": "center",
+                "margin": 10,
+                "padding": 10,
+                "paddingBottom": 15,
+                "paddingTop": 15,
+                "textAlign": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "#ffff",
+                  "fontFamily": "Roboto",
+                  "fontSize": 22,
+                  "fontWeight": "700",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              SYNC QR codes
+            </Text>
+          </View>
+        </View>
       </View>
     </View>
   </View>

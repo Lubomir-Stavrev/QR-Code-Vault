@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {useSyncData} from './queryServices/useSyncData';
-import encryptedStorage from '../../services/encryptedStorage';
+//import encryptedStorage from '../../services/encryptedStorage';
 import styles from '../../styles/QRCodeStyles';
 
 interface Props {
@@ -18,34 +18,30 @@ const QRCodeRoute: FC<Props> = props => {
           <View>
             {isLoading ? (
               <ActivityIndicator testID={'ActivityIndicator'} size="large" />
-            ) : (
-              <>
-                <TouchableOpacity
-                  accessibilityLabel="navigateToQRCodeScan"
-                  onPress={() => props.navigation.navigate('QRCodeScan')}>
-                  <View style={styles.menuButtonContainer}>
-                    <Text style={styles.menuButtonText}>Scan QR CODE</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  accessibilityLabel="navigateToUserQRCodes"
-                  onPress={() => props.navigation.navigate('UserQrCodes')}>
-                  <View style={styles.menuButtonContainer}>
-                    <Text style={styles.menuButtonText}>
-                      View QR code collection
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-                {encryptedStorage.isUserSignedInWithGoogle()}
-                <TouchableOpacity
-                  accessibilityLabel="navigateToUserQRCodes"
-                  onPress={() => syncData()}>
-                  <View style={styles.menuButtonContainer}>
-                    <Text style={styles.menuButtonText}>SYNC QR codes</Text>
-                  </View>
-                </TouchableOpacity>
-              </>
-            )}
+            ) : null}
+            <TouchableOpacity
+              accessibilityLabel="navigateToQRCodeScan"
+              onPress={() => props.navigation.navigate('QRCodeScan')}>
+              <View style={styles.menuButtonContainer}>
+                <Text style={styles.menuButtonText}>Scan QR CODE</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              accessibilityLabel="navigateToUserQRCodes"
+              onPress={() => props.navigation.navigate('UserQrCodes')}>
+              <View style={styles.menuButtonContainer}>
+                <Text style={styles.menuButtonText}>
+                  View QR code collection
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              accessibilityLabel="syncData"
+              onPress={() => syncData()}>
+              <View style={styles.menuButtonContainer}>
+                <Text style={styles.menuButtonText}>SYNC QR codes</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
