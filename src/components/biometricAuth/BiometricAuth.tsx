@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {Text, View, TouchableOpacity, ActivityIndicator} from 'react-native';
 
 import {useAuthenticateId} from './useAuthenticateId';
@@ -8,7 +8,10 @@ interface Props {
 }
 
 const BiometricAuth: FC<Props> = props => {
-  const {isLoading, isError} = useAuthenticateId(props);
+  const {authenticate, isLoading, isError} = useAuthenticateId(props);
+  useEffect(() => {
+    authenticate();
+  }, [authenticate]);
 
   return (
     <View

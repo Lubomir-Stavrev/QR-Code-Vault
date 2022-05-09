@@ -21,7 +21,7 @@ export const useSignOutFromGoogle = (navigation: Props) => {
       navigation.navigate('Auth');
     },
     onError: () => {
-      navigation.navigate('PinCodeBackupAuth');
+      navigation.navigate('Auth');
     },
   });
 

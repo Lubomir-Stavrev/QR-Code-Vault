@@ -4,6 +4,7 @@ import authStyles from '../../styles/AuthStyles';
 
 import {useIsBiometricSignInSupported} from './useIsBiometricSignInSupported';
 import {useSignInWithGoogle} from './useSignInWithGoogle';
+import {useSignOutFromGoogle} from './useSignOutFromGoogle';
 import {useConfigureGoogleSignIn} from './useConfigureGoogleSignIn';
 
 import {GoogleSigninButton} from '@react-native-google-signin/google-signin';
@@ -16,6 +17,7 @@ const Authentication: FC<Props> = ({navigation}) => {
   const configureGoogleSignIn = useConfigureGoogleSignIn();
   const isBiometricSignInSupported = useIsBiometricSignInSupported(navigation);
   const signInWithGoogle = useSignInWithGoogle(navigation);
+  const signOutFromGoogle = useSignOutFromGoogle(navigation);
 
   return (
     <View accessibilityLabel="welcomeAuth" style={authStyles.authContainer}>
@@ -32,17 +34,24 @@ const Authentication: FC<Props> = ({navigation}) => {
                 </View>
               </TouchableOpacity>
               {configureGoogleSignIn.isSuccess ? (
-                <TouchableOpacity>
-                  <GoogleSigninButton
-                    size={GoogleSigninButton.Size.Standard}
-                    color={GoogleSigninButton.Color.Dark}
-                    onPress={() =>
-                      signInWithGoogle
-                        .signIn()
-                        .then(() => navigation.navigate('QRCodeMenu'))
-                    }
-                  />
-                </TouchableOpacity>
+                <>
+                  <TouchableOpacity>
+                    <GoogleSigninButton
+                      size={GoogleSigninButton.Size.Standard}
+                      color={GoogleSigninButton.Color.Dark}
+                      onPress={() =>
+                        signInWithGoogle
+                          .signIn()
+                          .then(() => navigation.navigate('QRCodeMenu'))
+                      }
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => signOutFromGoogle.signOut()}>
+                    <View>
+                      <Text>SIGN OUT</Text>
+                    </View>
+                  </TouchableOpacity>
+                </>
               ) : (
                 <ActivityIndicator
                   accessibilityLabel="loadingIndicator"

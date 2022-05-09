@@ -1,5 +1,4 @@
 import encryptedStorage from './encryptedStorage';
-
 const {StaticUtils, ArrayStringifier} = require('simple-common-utils');
 const _contentTypeJson = 'application/json; charset=UTF-8';
 const key =
@@ -89,6 +88,7 @@ export default {
 
     return id;
   },
+
   async getFolderId(
     name: string,
     parents: string[],
@@ -102,7 +102,6 @@ export default {
         this.stringifyQueryParams(queryParams, '', ' and ', true) +
         ` and '${parents[0]}' in parents`,
     });
-
     if (!result.ok) {
       throw result;
     }
@@ -140,5 +139,97 @@ export default {
       .setPrefix(prefix)
       .setSeparator(separator)
       .process();
+  },
+  async getFilesWithContant(folderId: string) {
+    const accessToken = await encryptedStorage.getUserGoogleAccessToken();
+
+    const folderQRCodesAsBlob = await fetch(
+      `https://www.googleapis.com/drive/v2/files/${folderId}/children`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          credentials: headerAuth.credentials,
+        },
+      },
+    );
+    const parsedQRCodesAsText = await folderQRCodesAsBlob.text();
+    const parsedQRCodes = JSON.parse(parsedQRCodesAsText)?.items;
+    if (parsedQRCodes.length <= 0) {
+      return;
+    }
+    let qrCodesContentArr = [];
+
+    for (let i = 0; i <= parsedQRCodes.length - 1; i++) {
+      const qrDataSelfLink = parsedQRCodes[i].childLink;
+      const singleQRCodeBlob = await fetch(`${qrDataSelfLink}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          credentials: headerAuth.credentials,
+        },
+      });
+      const qrCodeAsText = await singleQRCodeBlob.text();
+      const downloadUrl = JSON.parse(qrCodeAsText)?.downloadUrl; //this is the link from where we can get the content of the text file
+
+      const qrCodeContentBlob = await fetch(`${downloadUrl}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          credentials: headerAuth.credentials,
+        },
+      });
+
+      const qrContentData = await qrCodeContentBlob.text();
+
+      if (qrContentData) {
+        qrCodesContentArr[qrCodesContentArr.length] = {content: qrContentData};
+      }
+    }
+    return qrCodesContentArr;
+  },
+  async syncDataWithDrive() {
+    const id: string = await this.getFolderId(
+      'qrCodeFolder',
+      ['root'],
+      mimeFolder,
+    );
+    const qrCodesContentFromDrive = await this.getFilesWithContant(id);
+    const localQRCodes = await encryptedStorage.getQRCodes();
+    if (!localQRCodes || !qrCodesContentFromDrive) {
+      return;
+    }
+    let isFound = false;
+
+    for (let i = 0; i <= localQRCodes.length - 1; i++) {
+      isFound = false;
+      for (let j = 0; j < qrCodesContentFromDrive.length - 1; j++) {
+        if (
+          qrCodesContentFromDrive[j].content?.trim() ===
+          localQRCodes[i].qrCodeData?.trim()
+        ) {
+          isFound = true;
+          break;
+        }
+      }
+      if (isFound === false) {
+        //here we are adding the missing qr code into the drive
+        await this.addQRCode(localQRCodes[i].qrCodeData);
+      }
+    }
+    for (let i = 0; i <= qrCodesContentFromDrive.length - 1; i++) {
+      isFound = false;
+      for (let j = 0; j < localQRCodes.length - 1; j++) {
+        if (
+          qrCodesContentFromDrive[i].content?.trim() ===
+          localQRCodes[j].qrCodeData?.trim()
+        ) {
+          isFound = true;
+          break;
+        }
+      }
+      if (isFound === false) {
+        //here we are adding the missing qr code into the encrypted storage
+        await encryptedStorage.addQRCode(qrCodesContentFromDrive[i].content);
+      }
+    }
+    return true;
   },
 };

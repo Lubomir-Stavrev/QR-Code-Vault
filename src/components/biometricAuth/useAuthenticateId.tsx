@@ -1,4 +1,4 @@
-import {useQuery} from 'react-query';
+import {useMutation} from 'react-query';
 import TouchID from 'react-native-touch-id';
 interface Props {
   navigation: {navigate: (text: string) => void};
@@ -16,16 +16,18 @@ export const useAuthenticateId = (props: Props) => {
     sensorErrorDescription: 'Too many attempts',
   };
 
-  const {isLoading, isError} = useQuery<Boolean, Error>(
-    'authData',
-    () => TouchID.authenticate('Authenticate', optionalConfigObject),
+  const {
+    mutate: authenticate,
+    isLoading,
+    isError,
+  } = useMutation<Boolean, Error>(
+    TouchID.authenticate('Authenticate', optionalConfigObject),
     {
       onSuccess: () => {
-        console.log('asdasd');
         props.navigation.navigate('QRCodeMenu');
       },
     },
   );
 
-  return {isLoading, isError};
+  return {authenticate, isLoading, isError};
 };
