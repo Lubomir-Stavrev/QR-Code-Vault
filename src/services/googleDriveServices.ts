@@ -197,13 +197,12 @@ export default {
       return;
     }
     let isFound = false;
-
     for (let i = 0; i <= localQRCodes.length - 1; i++) {
       isFound = false;
-      for (let j = 0; j < qrCodesContentFromDrive.length - 1; j++) {
+      for (let j = 0; j <= qrCodesContentFromDrive.length - 1; j++) {
         if (
-          qrCodesContentFromDrive[j].content?.trim() ===
-          localQRCodes[i].qrCodeData?.trim()
+          localQRCodes[i].qrCodeData?.trim() ===
+          qrCodesContentFromDrive[j].content?.trim()
         ) {
           isFound = true;
           break;
@@ -216,7 +215,7 @@ export default {
     }
     for (let i = 0; i <= qrCodesContentFromDrive.length - 1; i++) {
       isFound = false;
-      for (let j = 0; j < localQRCodes.length - 1; j++) {
+      for (let j = 0; j <= localQRCodes.length - 1; j++) {
         if (
           qrCodesContentFromDrive[i].content?.trim() ===
           localQRCodes[j].qrCodeData?.trim()
